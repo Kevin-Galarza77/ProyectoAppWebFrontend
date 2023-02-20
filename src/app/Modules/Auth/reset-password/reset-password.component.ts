@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent {
+  email:string='';
+
+
+  constructor(){
+    
+  }
+
+
+  resetPassword(){
+    console.log(this.email);
+  }
 
 }
