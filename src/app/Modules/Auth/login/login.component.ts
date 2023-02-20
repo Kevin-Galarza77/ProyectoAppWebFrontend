@@ -11,6 +11,7 @@ declare let alertify: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  
   email = new FormControl('', [Validators.required, Validators.email]);
 
   loginForm: FormGroup = this.fb.group({
