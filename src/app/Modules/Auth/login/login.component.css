@@ -1,0 +1,22 @@
+.login {
+    background-image: url('/assets/login_photo.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-bg {
+    background-color: rgb(0, 0, 0, 0.7);
+    min-width: 300px;
+    min-height: 400px;
+}
+
+.boder-login {
+    border: 2px solid #850000;
+}
+
+.alertify-notifier {
+    top: 12px;
+    right: 12px;
+    width: 250px;
+}

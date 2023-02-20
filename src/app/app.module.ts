@@ -10,6 +10,8 @@ import { HomeComponent } from './Modules/Pages/home/home.component';
 import { RoutingModule } from './routing.module';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,10 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserModule,
     BrowserAnimationsModule,
     RoutingModule,
+    ReactiveFormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
