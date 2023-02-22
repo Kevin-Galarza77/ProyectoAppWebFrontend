@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
+import { PagesModule } from './Modules/Pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
     BrowserModule,
     BrowserAnimationsModule,
     RoutingModule,
+    PagesModule,
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,

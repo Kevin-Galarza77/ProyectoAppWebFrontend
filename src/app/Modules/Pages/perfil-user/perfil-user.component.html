@@ -1,0 +1,94 @@
+<div *ngIf="EditUser" class="perfil-user d-flex justify-content-center align-items-center">
+    <div class="border position-relative border-danger d-flex justify-content-center align-items-center flex-column rounded-3 w-75" style="min-width: 250px;background-color: rgba(255, 255, 255, 0.564);">
+        <button class="btn btn-dark position-absolute top-0 end-0 m-1" (click)="EditUser = !EditUser" style="font-size: 10px;">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <div class="row w-100">
+            <h2 class="col fw-bolder text-center mb-2 py-2 w-100 border-bottom border-danger fs-2">Mi cuenta</h2>
+        </div>
+
+        <div class="row w-100">
+            <div class="col d-flex flex-column flex-wrap m-2">
+                <p class="fw-bolder fs-4">Nombre</p>
+                <p class="fs-5">{{usuario.Nombre_Usuario }}</p>
+            </div>
+            <div class="col d-flex flex-column flex-wrap m-2">
+                <p class="fw-bolder fs-4">Cédula</p>
+                <p class="fs-5">{{usuario.CI_Usuario }}</p>
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col d-flex flex-column flex-wrap m-2">
+                <p class="fw-bolder fs-4">Fecha de Nacimiento</p>
+                <p class="fs-5">{{usuario.FechaNacimiento_Usuario.split('T')[0] }}</p>
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col d-flex flex-column flex-wrap m-2">
+                <p class="fw-bolder fs-4">Email</p>
+                <p class="fs-5">{{usuario.email }}</p>
+            </div>
+            <div class="col d-flex flex-column flex-wrap m-2">
+                <p class="fw-bolder fs-4">Célular</p>
+                <p class="fs-5">{{usuario.Cel_Usuario }}</p>
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col d-flex flex-column flex-wrap m-2">
+                <p class="fw-bolder fs-4">Dirección</p>
+                <p class="fs-5">{{usuario.Direccion_Usuario }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!EditUser" class="perfil-user d-flex justify-content-center align-items-center">
+    <div class="border border-danger d-flex justify-content-center align-items-center rounded-3 flex-column w-75" style="background-color: rgba(255, 255, 255, 0.564);">
+        <div class="row w-100">
+            <h2 class="col fw-bolder text-center mb-2 py-2 fs-2 w-100 border-bottom border-danger">Mi cuenta</h2>
+        </div>
+        <form [formGroup]="userForm" class="d-flex flex-column m-5 w-75" (ngSubmit)="updateUSer()">
+            <div class="row">
+                <mat-form-field class="col" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Ex. Juan Pablo Suarez Almeida" type="text" autocomplete="off" formControlName="Nombre_Usuario" required>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="col" appearance="fill">
+                    <mat-label>Cédula</mat-label>
+                    <input (keypress)="numberOnly($event)" maxlength="10" placeholder="Ex. 1753256359" matInput type="tel" autocomplete="off" formControlName="CI_Usuario" required>
+                </mat-form-field>
+                <mat-form-field class="col" appearance="fill">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Ex. 06/18/2002" formControlName="FechaNacimiento_Usuario" required>
+                    <mat-hint class="text-light">MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col" appearance="fill">
+                    <mat-label>Correo Eléctronico</mat-label>
+                    <input matInput type="text" placeholder="Ex. lanenita@gmail.com" autocomplete="off" formControlName="email" required>
+                </mat-form-field>
+                <mat-form-field class="col" appearance="fill">
+                    <mat-label>Célular</mat-label>
+                    <input (keypress)="numberOnly($event)" maxlength="10" matInput type="tel" placeholder="Ex. 091848821" autocomplete="off" formControlName="Cel_Usuario" required>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="col">
+                    <mat-label>Dirección</mat-label>
+                    <textarea matInput placeholder="Ex. Calle Enriqueta..." formControlName="Direccion_Usuario"></textarea>
+                </mat-form-field>
+            </div>
+            <mat-divider class="bg-danger mb-3"></mat-divider>
+            <div class="d-flex justify-content-around flex-wrap align-items-center flex-row">
+                <button (click)="EditUser=!EditUser" class="btn btn-dark m-1 px-4">Cancelar</button>
+                <button type="submit" class="btn btn-danger m-1 px-4">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>

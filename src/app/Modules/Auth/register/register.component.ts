@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { RegisterService } from '../../Services/register.service';
+import { RegisterService } from '../Services/register.service';
 declare let alertify: any;
 
 @Component({
@@ -46,7 +46,7 @@ export class RegisterComponent {
       result => {
         if (result.status) {
           localStorage.setItem('token', result.token);
-          Swal.fire({ position: 'center', icon: 'success', title: result.alert , text:'Espera que el administrador acepte la activación de la cuenta.', confirmButtonColor:'rgb(165,220,134)' });
+          Swal.fire({ position: 'center', icon: 'success', title: result.alert , text:'Espera que el administrador acepte la activación de la cuenta.', confirmButtonColor:'green' });
           this.router.navigateByUrl('/Login');
         } else {
           Swal.fire({ icon: 'error', title: result.alert, confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });

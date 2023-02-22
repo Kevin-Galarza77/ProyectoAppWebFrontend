@@ -13,6 +13,10 @@ const routes: Routes = [
   { path: 'Register', component: RegisterComponent },
   { path: 'Reset-Passwrod', component: ResetPasswordComponent },
   
+  {
+    path: 'Home',
+    loadChildren: () => import('./Modules/Pages/pages.module').then(m => m.PagesModule)
+  },
 
   { path: '**', redirectTo: '/Login', pathMatch: 'full' }
 
