@@ -9,7 +9,10 @@
                 </mat-form-field>
                 <mat-form-field class="m-0 p-0" appearance="fill">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" autocomplete="off" formControlName="password" required>
+                    <input minlength="6" matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
                 <a routerLink="/Reset-Passwrod" class="mb-3 p-0 text-end">Olvide mi contraseña</a>
                 <button class="btn btn-danger">Ingresar</button>

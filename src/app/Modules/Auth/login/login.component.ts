@@ -14,7 +14,7 @@ declare let alertify: any;
 export class LoginComponent {
   
   email = new FormControl('', [Validators.required, Validators.email]);
-
+  hide: boolean = true;
   loginForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
