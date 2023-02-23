@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Auth/Services/auth.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +13,14 @@ import { AuthService } from '../../Auth/Services/auth.service';
 export class HomeComponent {
 
 
-  constructor(private authService:AuthService,
-              private router: Router){
-
+  constructor(private authService: AuthService,
+    private router: Router,
+    public dialog: MatDialog) {
   }
 
-  logout(){
+  logout() {
 
-    this.authService.logout().subscribe(result=>{
+    this.authService.logout().subscribe(result => {
       if (result.status) {
         Swal.fire({ position: 'center', icon: 'success', title: result.alert, showConfirmButton: false, timer: 2500 });
         this.router.navigateByUrl('/Login');
@@ -26,6 +28,18 @@ export class HomeComponent {
         Swal.fire({ allowOutsideClick: false, icon: 'error', text: result.alert, confirmButtonColor: 'rgb(220,53,69)' });
       }
     });
+
+  }
+
+  changePassword() {
+
+    const changePassword = this.dialog.open(ChangePasswordComponent, {
+      height: 'auto',
+      width: 'auto',
+      minWidth: '300px',
+      minHeight: '250px'
+    });
+
 
   }
 

@@ -30,7 +30,6 @@ export class LoginComponent {
 
     this.authService.login(this.loginForm.value).subscribe(
       result => {
-        console.log(result.data);
         if (result.status) {
           localStorage.setItem('token',result.token);
           localStorage.setItem('user_id',result.data.id);

@@ -16,14 +16,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
 import { PagesModule } from './Modules/Pages/pages.module';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ResetPasswordComponent,
-    HomeComponent
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import { PagesModule } from './Modules/Pages/pages.module';
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" routerLink="/Home/Perfil">Mi perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+                        <li><a class="dropdown-item" style="cursor: pointer;" (click)="changePassword()">Cambiar contraseña</a></li>
                         <li><a class="dropdown-item logout" (click)="logout()">Cerrar Sesión</a></li>
                     </ul>
                 </div>
