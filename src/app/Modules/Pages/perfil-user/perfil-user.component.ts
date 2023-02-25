@@ -13,17 +13,15 @@ export class PerfilUSerComponent {
 
 
   userForm: FormGroup = this.fb.group({
-    id:[0],
-    email: ['', Validators.required],//
-    CI_Usuario: ['', Validators.required],//
-    Nombre_Usuario: ['', Validators.required],//
-    FechaNacimiento_Usuario: ['', Validators.required],//
-    Cel_Usuario: ['', Validators.required],//
+    email: ['', Validators.required],
+    CI_Usuario: ['', Validators.required],
+    Nombre_Usuario: ['', Validators.required],
+    FechaNacimiento_Usuario: ['', Validators.required],
+    Cel_Usuario: ['', Validators.required],
     Direccion_Usuario: ['', Validators.required],
   });
 
   usuario:any = {
-    id:0,
     CI_Usuario:'',
     Cel_Usuario:'',
     Direccion_Usuario:'',
@@ -63,8 +61,8 @@ export class PerfilUSerComponent {
     const usuario_id = localStorage.getItem('usuario_id');
     this.usuarioService.getUsuario(usuario_id).subscribe(
       result=>{
+
         if (result.status) {
-          this.usuario.id = result.data.id;
           this.usuario.CI_Usuario = result.data.CI_Usuario;
           this.usuario.Cel_Usuario = result.data.Cel_Usuario;
           this.usuario.Direccion_Usuario = result.data.Direccion_Usuario;

@@ -25,7 +25,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const headers = { Authorization: `Bearer ${token}` }
 
-    return this.http.post(`${GLOBAL.url}logout`, { headers }, { headers });
+    return this.http.post(`${GLOBAL.url}logout`, {  }, { headers });
 
   }
 
@@ -37,7 +37,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const headers = { Authorization: `Bearer ${token}` }
 
-    return this.http.put(`${GLOBAL.url}user/${user.id}`, user , { headers });
+    return this.http.put(`${GLOBAL.url}user/${token}`, user , { headers });
 
   }
 

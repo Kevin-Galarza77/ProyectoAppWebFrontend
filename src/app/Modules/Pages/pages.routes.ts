@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from './home/home.component';
+import { InicioComponent } from './inicio/inicio.component';
 import { PerfilUSerComponent } from './perfil-user/perfil-user.component';
  
 
@@ -12,6 +13,11 @@ const PAGES_ROUTES: Routes = [
                 //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
                  loadChildren: () => import('./perfil-user/perfil-user.module').then(m => m.PerfilUSerModule)
              },
+             {
+                path: 'Inicio', component: InicioComponent,
+               //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
+                loadChildren: () => import('./inicio/inicio.module').then(m => m.InicioModule)
+            },
 
             { path: '**', pathMatch: 'full', redirectTo: '' }
         ]

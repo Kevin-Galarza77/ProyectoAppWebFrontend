@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GLOBAL } from './global.service';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosService {
+export class InicioService {
 
   token:string = String(localStorage.getItem('token'));
 
@@ -17,16 +19,13 @@ export class UsuariosService {
     return { Authorization: `Bearer ${token}` };
   }
 
-  getUsuario(id: any): Observable<any> {
+  getFavoritesProducts(): Observable<any> {
+    
     const headers = this.hearders();
-    return this.http.get(`${GLOBAL.url}usuarios/${this.token}`, { headers });
-  }
 
-  updateUsuario(usuario:any): Observable<any>{
-    const headers = this.hearders();
-    return this.http.put(`${GLOBAL.url}usuarios/${this.token}`, usuario , { headers } );
-  }
+    return this.http.get(`${GLOBAL.url}products/favorites?token=${this.token}`, { headers });
 
+  }
 
 
 }

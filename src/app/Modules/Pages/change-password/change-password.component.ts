@@ -12,7 +12,6 @@ declare let alertify: any;
 export class ChangePasswordComponent {
 
   userForm: FormGroup = this.fb.group({
-    id:[localStorage.getItem('user_id')],
     oldPasword: ['', Validators.required],
     newpassword: ['', Validators.required],
     repeat_password: ['', Validators.required]
