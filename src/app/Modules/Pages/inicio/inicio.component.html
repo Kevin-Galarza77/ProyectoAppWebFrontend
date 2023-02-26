@@ -1,21 +1,21 @@
-<div class="inicio d-flex justify-content-center align-items-center flex-column">
-    <div class="row flex-grow-1 w-100 justify-content-center align-items-center">
-        <div class="w-75 border-light border rounded-2" style="background-color: rgba(147, 147, 147, 0.504);">
+<div class="inicio d-flex justify-content-around align-items-center flex-column">
+    <div class="row w-100 justify-content-center align-items-center my-3">
+        <div class="w-75 border-light border rounded-2" style="background-color: rgba(147, 147, 147, 0.2);">
             <h2 class="m-0 p-0 text-light fs-3 mt-2">Pedido Fácil</h2>
             <p class="text-light">! Tus favoritos fáciles estan aqui !</p>
-            <div class="m-3 row">
-                <div *ngFor="let favoriteProduct of favoritesProducts" style="background-color: rgba(0, 0, 0, 0.4);" class="col border border-light border-3 m-2 p-0 rounded-3">
+            <div class="m-3 row flex-wrap justify-content-center align-items-center">
+                <section *ngFor="let favoriteProduct of favoritesProducts" style="background-color: rgba(0, 0, 0, 0.4);" class="col border border-light border-3 m-2 p-0 rounded-3">
                     <div class="row mt-2 p-0 m-1">
                         <div class="col m-1 p-0">
                             <img [src]="favoriteProduct.url" class="w-100 h-100" alt="">
                         </div>
                         <div class="col m-1 p-0 d-flex justify-content-center align-items-center flex-column">
-                            <p class="text-light text-center fs-6 fw-bolder">{{ favoriteProduct.Nombre_Producto }}</p>
+                            <h6 class="text-light text-center fs-6 fw-bolder">{{ favoriteProduct.Nombre_Producto }}</h6>
                             <p class="text-light text-center">{{ favoriteProduct.Descripcion_Producto }}</p>
                             <p class="text-light text-center">{{ favoriteProduct.Precio_Producto | currency:'USD':'symbol':'1.2-2' }}</p>
                         </div>
                     </div>
-                    <div class="row p-0 m-1">
+                    <div class="row p-0 m-1 flex-nowrap">
                         <div class="col d-flex justify-content-center align-items-center p-0">
                             <button (click)="decreaseProduct(favoriteProduct.id)" class="col-3 m-1 btn btn-light rounded-circle d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
                                 -
@@ -31,12 +31,22 @@
                             <button class="btn btn-light btn-sm w-100">Agregar</button>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
-    <div class="row flex-grow-1 bg-primary w-100">
-
+    <div class="row w-100 justify-content-center align-items-center m-3">
+        <div class="w-75 border-light border rounded-2" style="background-color: rgba(147, 147, 147, 0.2);">
+            <h2 class="m-0 p-0 text-light fs-3 mt-2">Categorias de Productos</h2>
+            <div class="m-3 row flex-wrap justify-content-center align-items-center">
+                <section class="category d-flex justify-content-center align-items-center flex-column m-2 p-0 py-3 border border-light border-2 rounded-3" *ngFor="let category of categories" [routerLink]="category.id">
+                    <h6 class="fs-5 text-white text-center m-2">{{ category.nombre }}</h6>
+                    <div class="text-center">
+                        <img [src]="category.url" class="w-75" alt="">
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
 </div>

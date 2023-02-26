@@ -1,0 +1,13 @@
+.subcategorias {
+    min-height: calc(100vh - 75px);
+}
+
+.subcategory {
+    width: 250px !important;
+    background-color: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.subcategory:hover {
+    background-color: black;
+}

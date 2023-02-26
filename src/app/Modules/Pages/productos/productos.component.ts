@@ -1,44 +1,46 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from 'src/app/Services/productos.service';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  selector: 'app-productos',
+  templateUrl: './productos.component.html',
+  styleUrls: ['./productos.component.css']
 })
-export class InicioComponent {
+export class ProductosComponent {
 
-  favoritesProducts:any[]=[];
-  categories:any[]=[];
+  productos:any[]=[];
+  subcategoria_id:string='';
+  subcategoria_nombre:string='';
+  id: any = this.route.snapshot.params['sub'];
 
-  constructor(private productService:ProductosService){
-    this.getFAvoritesProducts();
-    this.getCategories();
+  constructor(private productoService:ProductosService,
+    private route: ActivatedRoute){
+      this.getProductos();
+      this.getSubCategory();
   }
 
 
-  getFAvoritesProducts(){
-
-    this.productService.getFavoritesProducts().subscribe(
+  getProductos(){
+    this.productoService.getProducts(this.id).subscribe(
       result=>{
         if (result.status) {
-          this.favoritesProducts = result.data;
+          this.productos = result.data;
         }
-
       }
-    );
-
+    )
   }
 
-  getCategories(){
-    this.productService.getCategorias().subscribe(
+  getSubCategory(){
+    this.productoService.getSubCategory(this.id).subscribe(
       result=>{
-        this.categories=result;
-        console.log(this.categories);
+        if (result.status) {
+          this.subcategoria_nombre= result.data.nombre;
+        }
       }
     );
   }
-
+  
   incrementProduct(id:any,stock:number){
     const input = document.getElementById(id) as HTMLInputElement;
     if( Number(input.value) < stock) input.value = (Number(input.value) + 1).toString();
