@@ -29,15 +29,18 @@ export class AuthService {
 
   }
 
-
-
- 
   changePassword(user:any): Observable<any> {
 
     const token = localStorage.getItem('token');
     const headers = { Authorization: `Bearer ${token}` }
 
     return this.http.put(`${GLOBAL.url}user/${token}`, user , { headers });
+
+  }
+
+  forgotPassword(email:string): Observable<any> {
+    
+    return this.http.post(`${GLOBAL.url}password/forgot?email=${email}`,{});
 
   }
 

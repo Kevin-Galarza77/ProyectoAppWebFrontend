@@ -11,7 +11,7 @@ const routes: Routes = [
 
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent },
-  { path: 'Reset-Passwrod', component: ResetPasswordComponent },
+  { path: 'Reset-Password/:token', component: ResetPasswordComponent },
   
   {
     path: 'Home',
