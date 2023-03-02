@@ -17,7 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { PagesModule } from './Modules/Pages/pages.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './Modules/Auth/forgot-password/forgot-password.component';
-
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { ForgotPasswordComponent } from './Modules/Auth/forgot-password/forgot-p
     MatNativeDateModule,
     MatDividerModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

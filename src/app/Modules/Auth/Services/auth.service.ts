@@ -45,6 +45,11 @@ export class AuthService {
   }
 
 
+  resetPassword(data:any,token:any): Observable<any>{
+    return this.http.post(`${GLOBAL.url}password/reset?email=${data.email}&password=${data.password}&repeat_password=${data.repeat_password}&token=${token}`,{});
+  }
+
+
 
 
 
