@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from 'src/app/Services/guards/auth.guard';
 import { CategoriasComponent } from './Categorias/categorias.component';
 import { GestionProductosComponent } from './gestion-productos/gestion-productos.component';
 import { HomeComponent } from './home/home.component';
@@ -13,7 +14,7 @@ import { SubcategoriesComponent } from './subcategories/subcategories.component'
 
 const PAGES_ROUTES: Routes = [
     {
-        path: '', component: HomeComponent, children: [
+        path: '', component: HomeComponent, canActivate:[AuthGuard],children: [
              {
                  path: 'Perfil', component: PerfilUSerComponent,
                 //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
