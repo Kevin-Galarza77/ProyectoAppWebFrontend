@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from 'src/app/Services/guards/auth.guard';
 import { CategoriasComponent } from './Categorias/categorias.component';
 import { GestionProductosComponent } from './gestion-productos/gestion-productos.component';
+import { GestionUsuariosComponent } from './Gestion-usuarios/gestion-usuarios.component';
 import { HomeComponent } from './home/home.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PedidosComponent } from './Pedidos/pedidos.component';
@@ -54,6 +55,11 @@ const PAGES_ROUTES: Routes = [
                 path: 'Pedidos', component: PedidosComponent,
                //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
                 loadChildren: () => import('./Pedidos/pedidos.module').then(m => m.PedidosModule)
+            },
+            {
+                path: 'Usuarios', component: GestionUsuariosComponent,
+               //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
+                loadChildren: () => import('./Gestion-usuarios/gestion-usuarios.module').then(m => m.GestionUsuariosModule)
             },
             { path: '**', pathMatch: 'full', redirectTo: '' }
         ]
