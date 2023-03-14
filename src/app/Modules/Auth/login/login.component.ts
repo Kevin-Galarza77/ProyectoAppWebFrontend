@@ -31,11 +31,9 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe(
       result => {
         if (result.status) {
-          localStorage.setItem('token',result.token);
-          localStorage.setItem('user_id',result.data.id);
-          localStorage.setItem('usuario_id',result.data.usuario.id);
           Swal.fire({ position: 'center', icon: 'success', title: "Bienvenido", showConfirmButton: false, timer: 1500 });
           this.router.navigateByUrl('/Home');
+          localStorage.setItem('token',result.token);
         } else {
           if (result.auth) {
             this.router.navigateByUrl('/Home');

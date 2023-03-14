@@ -18,6 +18,7 @@ import { PagesModule } from './Modules/Pages/pages.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './Modules/Auth/forgot-password/forgot-password.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDividerModule,
     MatDialogModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

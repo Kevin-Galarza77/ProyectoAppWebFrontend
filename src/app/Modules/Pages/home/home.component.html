@@ -1,31 +1,43 @@
-<div style="min-height: 100vh;">
+<div style="min-height: 100vh">
     <nav class="navbar navbar-expand-lg bg-light border border-danger border-3">
         <div class="container-fluid m-0 p-0">
-            <img src="./assets/logo_deposito.png" class="logo" alt="">
+            <img src="./assets/logo_deposito.png" class="logo" alt="" />
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="Inicio">Inicio</a>
+                        <button routerLink="Inicio" mat-button>Inicio</button>
+
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Opcion 2</a>
+                        <button mat-button [matMenuTriggerFor]="gestion">Gestión</button>
+                        <mat-menu #gestion="matMenu">
+                            <button mat-menu-item routerLink="/Home/Categorias">Categorias</button>
+                            <button mat-menu-item>SubCategorias</button>
+                            <button mat-menu-item>Productos</button>
+                        </mat-menu>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled">Link</a>
                     </li>
                 </ul>
-                <div class="dropdown-center" style="min-width: 200px;">
-                    <button class="btn dropdown-toggle d-flex justify-content-center align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="dropdown-center" style="min-width: 200px">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>account_circle</mat-icon>
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="/Home/Perfil">Mi perfil</a></li>
-                        <li><a class="dropdown-item" style="cursor: pointer;" (click)="changePassword()">Cambiar contraseña</a></li>
-                        <li><a class="dropdown-item logout" (click)="logout()">Cerrar Sesión</a></li>
-                    </ul>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <a class="text-decoration-none text-dark"  routerLink="/Home/Perfil">Mi perfil</a>
+                        </button>
+                        <button mat-menu-item>
+                            <a class="text-decoration-none text-dark"  (click)="changePassword()">Cambiar Contraseña</a>
+                        </button>
+                        <button mat-menu-item class="logout">
+                            <a class="text-decoration-none text-dark text-dark link-light"  (click)="logout()">Cerrar Sesión</a>
+                        </button>
+                    </mat-menu>
                 </div>
             </div>
         </div>

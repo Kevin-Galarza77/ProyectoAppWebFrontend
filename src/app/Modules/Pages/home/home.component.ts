@@ -29,10 +29,11 @@ export class HomeComponent {
       }
     });
 
+    localStorage.removeItem('token');
+    
   }
 
   changePassword() {
-
     const changePassword = this.dialog.open(ChangePasswordComponent, {
       height: 'auto',
       width: 'auto',

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
+import { CategoriasComponent } from './Categorias/categorias.component';
 import { HomeComponent } from './home/home.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PerfilUSerComponent } from './perfil-user/perfil-user.component';
@@ -30,7 +31,11 @@ const PAGES_ROUTES: Routes = [
                //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
                 loadChildren: () => import('./productos/productos.module').then(m => m.ProductosModule)
             },
-
+            {
+                path: 'Categorias', component: CategoriasComponent,
+               //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
+                loadChildren: () => import('./Categorias/categoria.module').then(m => m.CategoriaModule)
+            },
             { path: '**', pathMatch: 'full', redirectTo: '' }
         ]
     }

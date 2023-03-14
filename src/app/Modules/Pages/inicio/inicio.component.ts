@@ -33,8 +33,7 @@ export class InicioComponent {
   getCategories(){
     this.productService.getCategorias().subscribe(
       result=>{
-        this.categories=result;
-        console.log(this.categories);
+        this.categories=result.data;
       }
     );
   }

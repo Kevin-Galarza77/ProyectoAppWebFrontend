@@ -24,7 +24,6 @@ export class SubcategoriesComponent {
   getSubcategories() {
     this.productoService.getSubCategorias(this.id).subscribe(
       result => {
-        console.log(result);
         this.subcategories = result.data;
       }
     );
@@ -32,7 +31,6 @@ export class SubcategoriesComponent {
   getCategory(){
     this.productoService.getCategory(this.id).subscribe(
       result=>{
-        console.log(result);
         this.nombreCategory=result.nombre;
       }
     );

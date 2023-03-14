@@ -1,0 +1,21 @@
+<form [formGroup]="formCategory" class="d-flex flex-column p-3" (submit)="createEditCategory()" enctype="multipart/form-data">
+    <p class="text-center display-6 p-0 m-0">{{ section ? 'Nueva Categoria' : 'Editar Categoria'}}</p>
+    <mat-divider class="mt-1 mb-3"></mat-divider>
+    <div class="row">
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Ex. Cerveza" type="text" autocomplete="off" formControlName="nombre" required>
+        </mat-form-field>
+        <div class="col d-flex flex-column">
+            <label for="image" class="fs-6 mb-2">Imagen</label>
+            <input type="file" id="image" accept="image/*" (change)="onFileSelected($event)" formControlName="imagen">
+        </div>
+    </div>
+    <div *ngIf="!section" class="row d-flex justify-content-center align-items-center mb-3">
+        <img [src]="formCategory.value.url" style="width: 250px;">
+    </div>
+    <div class="d-flex justify-content-around align-items-center">
+        <button (click)="close()" type="button" class="btn btn-danger px-4">Cancelar</button>
+        <button class="btn btn-success px-5">{{ section? 'Crear ' : 'Editar ' }}</button>
+    </div>
+</form>

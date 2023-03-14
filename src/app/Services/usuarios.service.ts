@@ -27,6 +27,4 @@ export class UsuariosService {
     return this.http.put(`${GLOBAL.url}usuarios/${this.token}`, usuario , { headers } );
   }
 
-
-
 }
