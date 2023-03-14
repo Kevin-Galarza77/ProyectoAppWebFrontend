@@ -47,6 +47,8 @@ export class TableCategoriaComponent implements AfterViewInit {
         if (result.status) {
           this.categorys = result.data;
           this.dataSource = new MatTableDataSource(this.categorys);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       }
     );

@@ -46,6 +46,8 @@ export class TableSubCategoriaComponent {
         if (result.status) {
           this.subCategorys = result.data;
           this.dataSource = new MatTableDataSource(this.subCategorys);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       }
     );

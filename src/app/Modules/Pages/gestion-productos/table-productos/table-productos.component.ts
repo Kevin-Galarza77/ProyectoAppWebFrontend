@@ -15,8 +15,8 @@ declare let alertify: any;
   templateUrl: './table-productos.component.html',
   styleUrls: ['./table-productos.component.css']
 })
-export class TableProductosComponent {
-  displayedColumns: string[] = ['Accion','Codigo' ,'Nombre', 'Stock', 'Precio', 'Descripcion', 'Imagen'];
+export class TableProductosComponent implements AfterViewInit {
+  displayedColumns: string[] = ['Accion', 'Codigo', 'Nombre', 'Stock', 'Precio', 'Descripcion', 'Imagen'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -30,7 +30,7 @@ export class TableProductosComponent {
     this.getAllProductos();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -50,6 +50,8 @@ export class TableProductosComponent {
           console.log(result.data);
           this.productos = result.data;
           this.dataSource = new MatTableDataSource(this.productos);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       }
     );
@@ -67,8 +69,8 @@ export class TableProductosComponent {
     productoSend.Precio_Producto = producto.Precio_Producto;
     productoSend.Descripcion_Producto = producto.Descripcion_Producto;
     productoSend.imagen = null;
-    productoSend.url=producto.url;
-    productoSend.subCategoria_id=producto.subCategoria_id;
+    productoSend.url = producto.url;
+    productoSend.subCategoria_id = producto.subCategoria_id;
     productoSend.categoria_id = producto.subcategoria.categoria_id;
 
     const dialogref = this.dialog.open(FormProductosComponent, {
