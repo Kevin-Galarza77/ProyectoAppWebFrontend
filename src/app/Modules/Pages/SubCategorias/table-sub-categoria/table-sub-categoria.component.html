@@ -1,1 +1,49 @@
-<p>table-sub-categoria works!</p>
+<div class="p-4 rounded-3 mb-3 border border-light" style="background-color: rgba(147, 147, 147, 0.2);">
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+
+    <div class="mb-4">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="Acción">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-secondary text-light fs-5"> Acción </th>
+                <td mat-cell *matCellDef="let row">
+                    <button (click)="createEditCategoria(row)" class="btn btn-success m-1">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button (click)="deleteCategory(row.id)" class="btn btn-danger m-1">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-secondary text-light fs-5"> Nombre </th>
+                <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Imagen">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-secondary text-light fs-5"> Imagen </th>
+                <td mat-cell *matCellDef="let row">
+                    <img [src]="row.url" style="width: 150px;height: 150px;">
+                </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                    <p class="text-center">No existen registros</p>
+                </td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+    </div>
+</div>

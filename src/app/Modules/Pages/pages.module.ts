@@ -11,17 +11,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { FormSubCategoriaComponent } from './SubCategorias/form-sub-categoria/form-sub-categoria.component';
-import { TableSubCategoriaComponent } from './SubCategorias/table-sub-categoria/table-sub-categoria.component';
-
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    ChangePasswordComponent,
-    FormSubCategoriaComponent,
-    TableSubCategoriaComponent
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

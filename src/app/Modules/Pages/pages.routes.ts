@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { PerfilUSerComponent } from './perfil-user/perfil-user.component';
 import { ProductosComponent } from './productos/productos.component';
+import { SubCategoriasComponent } from './SubCategorias/sub-categorias.component';
 import { SubcategoriesComponent } from './subcategories/subcategories.component';
  
 
@@ -35,6 +36,11 @@ const PAGES_ROUTES: Routes = [
                 path: 'Categorias', component: CategoriasComponent,
                //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
                 loadChildren: () => import('./Categorias/categoria.module').then(m => m.CategoriaModule)
+            },
+            {
+                path: 'SubCategorias', component: SubCategoriasComponent,
+               //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
+                loadChildren: () => import('./SubCategorias/subcategoria.module').then(m => m.SubcategoriaModule)
             },
             { path: '**', pathMatch: 'full', redirectTo: '' }
         ]
