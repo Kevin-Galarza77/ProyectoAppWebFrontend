@@ -34,6 +34,7 @@ export class LoginComponent {
           Swal.fire({ position: 'center', icon: 'success', title: "Bienvenido", showConfirmButton: false, timer: 1500 });
           this.router.navigateByUrl('/Home');
           localStorage.setItem('token',result.token);
+          localStorage.setItem('rol',result.data.usuario.rol_id);
         } else {
           if (result.auth) {
             this.router.navigateByUrl('/Home');

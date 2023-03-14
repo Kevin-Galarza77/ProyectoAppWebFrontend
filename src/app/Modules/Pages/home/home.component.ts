@@ -12,10 +12,13 @@ import { ChangePasswordComponent } from '../change-password/change-password.comp
 })
 export class HomeComponent {
 
+  admin:boolean = false;
 
   constructor(private authService: AuthService,
     private router: Router,
     public dialog: MatDialog) {
+      const rol = Number(localStorage.getItem('rol'));
+      if (rol === 1) this.admin=true;
   }
 
   logout() {

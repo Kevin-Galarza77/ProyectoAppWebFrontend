@@ -4,9 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PedidosService } from 'src/app/Services/pedidos.service';
-import { ProductosService } from 'src/app/Services/productos.service';
-import Swal from 'sweetalert2';
-import { FormProductosComponent } from '../../gestion-productos/form-productos/form-productos.component'; 
 import { AccionarPedidoComponent } from '../accionar-pedido/accionar-pedido.component';
 declare let alertify: any;
 
@@ -15,7 +12,7 @@ declare let alertify: any;
   templateUrl: './table-pedidos-admin.component.html',
   styleUrls: ['./table-pedidos-admin.component.css']
 })
-export class TablePedidosAdminComponent  implements AfterViewInit {
+export class TablePedidosAdminComponent implements AfterViewInit {
   displayedColumns: string[] = ['Accion', 'Usuario', 'Fecha', 'Direccion', 'Total', 'Estado'];
   dataSource: MatTableDataSource<any>;
 
@@ -24,12 +21,19 @@ export class TablePedidosAdminComponent  implements AfterViewInit {
 
   pedidos: any[] = [];
 
-  section:boolean = true;
+  section: boolean = true;
 
   constructor(private pedidosService: PedidosService,
     public dialog: MatDialog) {
+    const rol = Number(localStorage.getItem('rol'));
+    if (rol === 2) {
+      this.section = false;
+      this.getPedidosForUser();
+    }else{
+      this.getAllPedidos();
+    }
     this.dataSource = new MatTableDataSource(this.pedidos);
-    this.getAllPedidos();
+    
   }
 
   ngAfterViewInit(): void {
@@ -48,11 +52,25 @@ export class TablePedidosAdminComponent  implements AfterViewInit {
   getAllPedidos() {
     this.pedidosService.getAllPedidos().subscribe(
       result => {
-        this.pedidos= result;
+        this.pedidos = result;
         this.pedidos.sort((a, b) => a.estados__pedido_id - b.estados__pedido_id);
         this.dataSource = new MatTableDataSource(this.pedidos);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+      }
+    );
+  }
+
+  getPedidosForUser() {
+    this.pedidosService.getPedidosForUser().subscribe(
+      result => {
+        if (result.status) {
+          this.pedidos = result.data;
+          this.pedidos.sort((a, b) => a.estados__pedido_id - b.estados__pedido_id);
+          this.dataSource = new MatTableDataSource(this.pedidos);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
       }
     );
   }
@@ -65,7 +83,7 @@ export class TablePedidosAdminComponent  implements AfterViewInit {
       minHeight: '250px',
       data: {
         section: this.section,
-        pedido:pedido 
+        pedido: pedido
       }
     });
 

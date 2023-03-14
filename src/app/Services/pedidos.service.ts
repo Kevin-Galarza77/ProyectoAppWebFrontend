@@ -22,6 +22,12 @@ export class PedidosService {
     return this.http.get(`${GLOBAL.url}pedidos`, { headers });
   }
 
+  getPedidosForUser(): Observable<any> {
+    const headers = this.hearders();
+    const token = localStorage.getItem('token');
+    return this.http.get(`${GLOBAL.url}pedidos/ForUserId?token=${token}`,{ headers });
+  }
+
   updateEstadoPedidos(id:any,estado:any): Observable<any> {
     const headers = this.hearders();
     return this.http.put(`${GLOBAL.url}pedidos/updateEstado?cabezara_id=${id}&estado=${estado}`,{},{ headers });

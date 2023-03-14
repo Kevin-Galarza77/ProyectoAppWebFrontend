@@ -11,8 +11,9 @@
                         <button routerLink="Inicio" mat-button>Inicio</button>
                     </li>
                     <li class="nav-item">
-                        <button mat-button [matMenuTriggerFor]="gestion">Gestión</button>
+                        <button *ngIf="admin" mat-button [matMenuTriggerFor]="gestion">Gestión</button>
                         <mat-menu #gestion="matMenu">
+                            <button mat-menu-item routerLink="/Home/Usuarios">Usuarios</button>
                             <button mat-menu-item routerLink="/Home/Categorias">Categorias</button>
                             <button mat-menu-item routerLink="/Home/SubCategorias">SubCategorias</button>
                             <button mat-menu-item routerLink="/Home/Productos">Productos</button>
@@ -27,14 +28,14 @@
                         <mat-icon>account_circle</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                            <a class="text-decoration-none text-dark"  routerLink="/Home/Perfil">Mi perfil</a>
+                        <button mat-menu-item routerLink="/Home/Perfil">
+                            Mi perfil
                         </button>
-                        <button mat-menu-item>
-                            <a class="text-decoration-none text-dark"  (click)="changePassword()">Cambiar Contraseña</a>
+                        <button mat-menu-item (click)="changePassword()">
+                            Cambiar Contraseña
                         </button>
-                        <button mat-menu-item class="logout">
-                            <a class="text-decoration-none text-dark text-dark link-light"  (click)="logout()">Cerrar Sesión</a>
+                        <button mat-menu-item class="logout" (click)="logout()">
+                            Cerrar Sesión
                         </button>
                     </mat-menu>
                 </div>
