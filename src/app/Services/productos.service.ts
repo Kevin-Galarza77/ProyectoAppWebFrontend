@@ -50,9 +50,25 @@ export class ProductosService {
     return this.http.get(`${GLOBAL.url}products/ForSubCategory?subcategory_id=${id}`, { headers });
   }
 
+  getAllProducts(): Observable<any> {
+    const headers = this.hearders();
+    return this.http.get(`${GLOBAL.url}products`, { headers });
+  }
 
+  createProducto(category:any): Observable<any> {
+    const headers = this.hearders();
+    return this.http.post(`${GLOBAL.url}products`, category ,{ headers });
+  }
 
+  updateProducto(category:any,id:any): Observable<any> {
+    const headers = this.hearders();
+    return this.http.post(`${GLOBAL.url}products/${id}`, category ,{ headers });
+  }
 
+  deleteProducto(id:any): Observable<any> {
+    const headers = this.hearders();
+    return this.http.delete(`${GLOBAL.url}products/${id}` ,{ headers });
+  }
 
 
 }

@@ -22,6 +22,12 @@ export class SubCategoriasService  {
     return this.http.get(`${GLOBAL.url}subcategories`, { headers });
   }
 
+  getAllSubcategoriesForID(categoria_id:any): Observable<any> {
+    const headers = this.hearders();
+    return this.http.get(`${GLOBAL.url}subcategories/ForCategory?categoria_id=${categoria_id}`, { headers });
+  }
+
+
   createSubcategories(category:any): Observable<any> {
     const headers = this.hearders();
     return this.http.post(`${GLOBAL.url}subcategories`, category ,{ headers });

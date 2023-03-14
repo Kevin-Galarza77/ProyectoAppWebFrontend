@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TableCategoriaComponent } from '../Categorias/table-categoria/table-categoria.component'; 
 import { FormSubCategoriaComponent } from './form-sub-categoria/form-sub-categoria.component';
+import { TableSubCategoriaComponent } from './table-sub-categoria/table-sub-categoria.component';
 
 @Component({
   selector: 'app-sub-categorias',
@@ -10,7 +10,7 @@ import { FormSubCategoriaComponent } from './form-sub-categoria/form-sub-categor
 })
 export class SubCategoriasComponent  {
 
-  @ViewChild(TableCategoriaComponent) tableCategoria!:TableCategoriaComponent;
+  @ViewChild(TableSubCategoriaComponent) tableSubCategoria!:TableSubCategoriaComponent;
 
   constructor(public dialog: MatDialog){
 
@@ -28,7 +28,7 @@ export class SubCategoriasComponent  {
     dialogref.afterClosed().subscribe(
       result=>{
         if (result) {
-          this.tableCategoria.getAllCategorys();
+          this.tableSubCategoria.getAllSubCategorys();
         }
       }
     );

@@ -1,0 +1,64 @@
+<form [formGroup]="formProducto" class="d-flex flex-column p-3" (submit)="createEditProducto()" enctype="multipart/form-data">
+    <p class="text-center display-6 p-0 m-0">{{ section ? 'Nuevo Producto' : 'Editar Producto'}}</p>
+    <mat-divider class="mt-1 mb-3"></mat-divider>
+    <div class="row">
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Código del Producto</mat-label>
+            <input matInput placeholder="Ex. EHN5" type="text" autocomplete="off" formControlName="codigo_Producto" required>
+        </mat-form-field>
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Ex. Pilsener de Litro" type="text" autocomplete="off" formControlName="Nombre_Producto" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Stock</mat-label>
+            <input matInput placeholder="Ex. 50" type="number" min="1" autocomplete="off" formControlName="Stock_Producto" required>
+        </mat-form-field>
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Precio</mat-label>
+            <input matInput placeholder="Ex. 22.50" type="number" min="1" autocomplete="off" formControlName="Precio_Producto" required>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select (selectionChange)="getAllSubCategorys(formProducto.value.categoria_id)" formControlName="categoria_id" required>
+                <mat-option *ngFor="let category of categorys" [value]="category.id">
+                    {{category.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col" appearance="fill">
+            <mat-label>Sub Categoria</mat-label>
+            <mat-select formControlName="subCategoria_id" [disabled]="subCategorys.length === 0" required>
+                <mat-option *ngFor="let subCategory of subCategorys" [value]="subCategory.id">
+                    {{subCategory.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <div class="col d-flex flex-column mb-4">
+            <label for="image" class="fs-6 mb-2">Imagen</label>
+            <input type="file" id="image" accept="image/*" (change)="onFileSelected($event)" formControlName="imagen">
+        </div>
+        <div *ngIf="!section" class="col d-flex justify-content-center align-items-center mb-3">
+            <img [src]="formProducto.value.url" style="width: 250px;">
+        </div>
+    </div>
+    <div class="row">
+        <mat-form-field class="col">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Ex. 1x12 unidades" formControlName="Descripcion_Producto"></textarea>
+        </mat-form-field>
+    </div>
+
+
+
+    <div class="d-flex justify-content-around align-items-center">
+        <button (click)="close()" type="button" class="btn btn-danger px-4">Cancelar</button>
+        <button class="btn btn-success px-5">{{ section? 'Crear ' : 'Editar ' }}</button>
+    </div>
+</form>
