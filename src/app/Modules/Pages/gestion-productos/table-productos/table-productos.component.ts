@@ -4,9 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductosService } from 'src/app/Services/productos.service';
-import { SubCategoriasService } from 'src/app/Services/sub-categorias.service';
 import Swal from 'sweetalert2';
-import { FormSubCategoriaComponent } from '../../SubCategorias/form-sub-categoria/form-sub-categoria.component';
 import { FormProductosComponent } from '../form-productos/form-productos.component';
 declare let alertify: any;
 

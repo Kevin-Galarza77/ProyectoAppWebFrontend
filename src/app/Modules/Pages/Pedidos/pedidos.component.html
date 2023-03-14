@@ -1,1 +1,8 @@
-<p>pedidos works!</p>
+<div class="row p-0 m-0">
+    <div *ngIf="section" class="col">
+        <app-table-pedidos-admin></app-table-pedidos-admin>
+    </div>
+    <div *ngIf="!section" class="col">
+        <app-table-pedidos-cliente></app-table-pedidos-cliente>
+    </div>
+</div>

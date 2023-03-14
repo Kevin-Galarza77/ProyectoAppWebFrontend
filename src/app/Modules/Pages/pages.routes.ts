@@ -4,6 +4,7 @@ import { CategoriasComponent } from './Categorias/categorias.component';
 import { GestionProductosComponent } from './gestion-productos/gestion-productos.component';
 import { HomeComponent } from './home/home.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { PedidosComponent } from './Pedidos/pedidos.component';
 import { PerfilUSerComponent } from './perfil-user/perfil-user.component';
 import { ProductosComponent } from './productos/productos.component';
 import { SubCategoriasComponent } from './SubCategorias/sub-categorias.component';
@@ -47,6 +48,11 @@ const PAGES_ROUTES: Routes = [
                 path: 'Productos', component: GestionProductosComponent,
                //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
                 loadChildren: () => import('./gestion-productos/gestion-productos.module').then(m => m.GestionProductosModule)
+            },
+            {
+                path: 'Pedidos', component: PedidosComponent,
+               //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
+                loadChildren: () => import('./Pedidos/pedidos.module').then(m => m.PedidosModule)
             },
             { path: '**', pathMatch: 'full', redirectTo: '' }
         ]

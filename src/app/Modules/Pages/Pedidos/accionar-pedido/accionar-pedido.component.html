@@ -1,0 +1,88 @@
+<div class="col p-4">
+    <button class="btn btn-danger position-absolute top-0 m-2 end-0" (click)="close()">X</button>
+    <h1 class="text-center mt-3">Nota de Venta</h1>
+    <mat-divider class="my-3"></mat-divider>
+    <div class="row mx-4">
+        <div class="col">
+            <p class="fw-bolder row"> Estado del Pedido</p>
+            <p class="row">{{ pedido.estados__pedido_id | pedidoEstado }} </p>
+        </div>
+        <div class="col">
+            <p class="fw-bolder row"> Fecha</p>
+            <p class="row">{{ pedido.Fecha_NotaVenta }} </p>
+        </div>
+    </div>
+    <div class="row mx-4">
+        <div class="col">
+            <p class="fw-bolder row"> C.I.</p>
+            <p class="row">{{ pedido.usuario.CI_Usuario }} </p>
+        </div>
+        <div class="col">
+            <p class="fw-bolder row"> Nombre</p>
+            <p class="row">{{ pedido.usuario.Nombre_Usuario }} </p>
+        </div>
+    </div>
+    <div class="row mx-4">
+        <div class="col">
+            <p class="fw-bolder row"> Dirección</p>
+            <p class="row">{{ pedido.Direccion_NotaVenta }} </p>
+        </div>
+    </div>
+    <div class="row mx-4">
+        <p class="fw-bolder row py-0 m-0"> Detalles</p>
+        <mat-divider class="my-1"></mat-divider>
+    </div>
+
+    <div class="row mx-4">
+        <div class="col">
+            <p class="fw-bolder row"> Producto</p>
+        </div>
+        <div class="col">
+            <p class="fw-bolder row"> Cantidad</p>
+        </div>
+        <div class="col">
+            <p class="fw-bolder row"> Subtotal</p>
+        </div>
+    </div>
+
+    <div *ngFor="let detalle of pedido.detalles_pedidos" class="row mx-4">
+        <div class="col">
+            <p class="row">{{ detalle.productos ? detalle.productos.Nombre_Producto : 'Null' }} </p>
+        </div>
+        <div class="col">
+            <p class="row"> x {{ detalle.Cantidad_Productos }} </p>
+        </div>
+        <div class="col">
+            <p class="row"> $ {{ detalle.Subtotal_Productos }} </p>
+        </div>
+    </div>
+
+    <div class="row mx-4">
+        <mat-divider class="my-1"></mat-divider>
+    </div>
+
+    <div class="row mx-4">
+        <div class="col">
+            <p class="fw-bolder row"> Total</p>
+        </div>
+        <div class="col d-flex justify-content-center align-items-center">
+            <p class="fw-bolder"> $ {{ pedido.Total_Pago_NotaVenta }} </p>
+        </div>
+    </div>
+    <div class="row mx-4">
+        <div class="col">
+            <p class="fw-bolder row"> Tipo de Pago</p>
+        </div>
+        <div class="col d-flex justify-content-center align-items-center">
+            <p class="fw-bolder"> {{ pedido.Tipo_Pago_NotaVenta }} </p>
+        </div>
+    </div>
+    <div class="row mx-4">
+        <mat-divider class="my-2"></mat-divider>
+    </div>
+    <div *ngIf="section" class="d-flex justify-content-around align-items-center">
+        <button (click)="updateEstadoPedido(2)" class="btn btn-success">Aceptar</button>
+        <button (click)="updateEstadoPedido(4)" class="btn btn-danger">Rechazar</button>
+        <button (click)="updateEstadoPedido(3)" class="btn btn-primary">Finalizado</button>
+    </div>
+</div>
