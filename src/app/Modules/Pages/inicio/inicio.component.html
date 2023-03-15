@@ -1,6 +1,6 @@
 <div class="inicio d-flex justify-content-around align-items-center flex-column">
     <div class="row w-100 justify-content-center align-items-center my-3">
-        <div class="w-75 border-light border rounded-2" style="background-color: rgba(147, 147, 147, 0.2);">
+        <div class="w-75 border-light border rounded-2" style="background-color: rgba(24, 24, 24, 0.503);">
             <h2 class="m-0 p-0 text-light fs-3 mt-2">Pedido Fácil</h2>
             <p class="text-light">! Tus favoritos fáciles estan aqui !</p>
             <div class="m-3 row flex-wrap justify-content-center align-items-center">
@@ -36,13 +36,13 @@
         </div>
     </div>
     <div class="row w-100 justify-content-center align-items-center m-3">
-        <div class="w-75 border-light border rounded-2" style="background-color: rgba(147, 147, 147, 0.2);">
-            <h2 class="m-0 p-0 text-light fs-3 mt-2">Categorias de Productos</h2>
+        <div class="w-75 border-light border rounded-2" style="background-color: rgba(24, 24, 24, 0.503);">
+            <h2 class="m-0 p-0 text-light fs-2 fw-bolder mt-3 text-center text-success">Categorias de Productos</h2>
             <div class="m-3 row flex-wrap justify-content-center align-items-center">
                 <section class="category d-flex justify-content-center align-items-center flex-column m-2 p-0 py-3 border border-light border-2 rounded-3" *ngFor="let category of categories" [routerLink]="category.id">
                     <h6 class="fs-5 text-white text-center m-2">{{ category.nombre }}</h6>
                     <div class="text-center">
-                        <img [src]="category.url" class="w-75" alt="">
+                        <img [src]="category.url" style="width: 185px;height: 280px;">
                     </div>
                 </section>
             </div>

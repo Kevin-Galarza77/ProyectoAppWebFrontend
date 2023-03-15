@@ -1,6 +1,7 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoriasService } from 'src/app/Services/categorias.service';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { SubCategoriasService } from 'src/app/Services/sub-categorias.service';
@@ -41,6 +42,7 @@ export class FormProductosComponent{
     private categoryService:CategoriasService,
     private subCategoryService: SubCategoriasService,
     private prodcutoService:ProductosService,
+    private spinner:NgxSpinnerService,
     @Optional() public dialogref: MatDialogRef<FormProductosComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any){
       this.getAllCategorys();
@@ -64,21 +66,25 @@ export class FormProductosComponent{
   }
 
   getAllCategorys() {
+    this.spinner.show();
     this.categoryService.getAllCategorys().subscribe(
       result => {
         if (result.status) {
           this.categorys = result.data;
         }
+        this.spinner.hide();
       }
     );
   }
 
   getAllSubCategorys(category_id:any) {
+    this.spinner.show();
     this.subCategoryService.getAllSubcategoriesForID(category_id).subscribe(
       result => {
         if (result.status) {
           this.subCategorys = result.data;
         }
+        this.spinner.hide();
       }
     );
   }
@@ -97,6 +103,7 @@ export class FormProductosComponent{
 
     if (this.section) {
       formData.append('imagen', this.fileToUpload);
+      this.spinner.show();
       this.prodcutoService.createProducto(formData).subscribe(
         result=>{
           if (result.status) {
@@ -110,11 +117,13 @@ export class FormProductosComponent{
               }
             }
           }
+          this.spinner.hide();
         }
       );
     }else{
       if(this.fileToUpload) formData.append('imagen', this.fileToUpload);
       formData.append('public_id',this.formProducto.get('public_id')?.value);
+      this.spinner.show();
       this.prodcutoService.updateProducto(formData,this.formProducto.value.id).subscribe(
         result=>{
           if (result.status) {
@@ -128,6 +137,7 @@ export class FormProductosComponent{
               }
             }
           }
+          this.spinner.hide();
         }
       );
     }
@@ -135,6 +145,14 @@ export class FormProductosComponent{
 
   close(){
     this.dialogref.close();
+  }
+
+  numberOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoriasService } from 'src/app/Services/categorias.service';
 import Swal from 'sweetalert2';
 import { FormCategoriaComponent } from '../form-categoria/form-categoria.component';
@@ -22,7 +23,7 @@ export class TableCategoriaComponent implements AfterViewInit {
 
   categorys: any[] = [];
 
-  constructor(private categoryService: CategoriasService,
+  constructor(private categoryService: CategoriasService,private spinner:NgxSpinnerService,
     public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.categorys);
     this.getAllCategorys();
@@ -42,6 +43,7 @@ export class TableCategoriaComponent implements AfterViewInit {
   }
 
   getAllCategorys() {
+    this.spinner.show();
     this.categoryService.getAllCategorys().subscribe(
       result => {
         if (result.status) {
@@ -50,6 +52,7 @@ export class TableCategoriaComponent implements AfterViewInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
+        this.spinner.hide();
       }
     );
   }
@@ -87,6 +90,7 @@ export class TableCategoriaComponent implements AfterViewInit {
     Swal.fire({ title: '¿Estás seguro?', text: "¡No podrás revertir esto!", icon: 'warning', showCancelButton: true, confirmButtonColor: 'rgb(220,53,69)', cancelButtonColor: 'gray', confirmButtonText: 'Eliminar', cancelButtonText: 'Cancelar', reverseButtons: true })
       .then((result) => {
         if (result.isConfirmed) {
+          this.spinner.show();
           this.categoryService.deleteCategorys(id).subscribe(
             result => {
               if (result.status) {
@@ -100,6 +104,7 @@ export class TableCategoriaComponent implements AfterViewInit {
                   }
                 }
               }
+              this.spinner.hide();
             }
           );
         }

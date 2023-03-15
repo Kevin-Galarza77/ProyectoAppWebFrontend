@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { SubCategoriasService } from 'src/app/Services/sub-categorias.service';
 import Swal from 'sweetalert2';
 import { FormSubCategoriaComponent } from '../form-sub-categoria/form-sub-categoria.component';
@@ -21,7 +22,7 @@ export class TableSubCategoriaComponent {
 
   subCategorys: any[] = [];
 
-  constructor(private subCategoryService: SubCategoriasService,
+  constructor(private subCategoryService: SubCategoriasService,private spinner:NgxSpinnerService,
     public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.subCategorys);
     this.getAllSubCategorys();
@@ -41,6 +42,7 @@ export class TableSubCategoriaComponent {
   }
 
   getAllSubCategorys() {
+    this.spinner.show();
     this.subCategoryService.getAllSubcategories().subscribe(
       result => {
         if (result.status) {
@@ -49,6 +51,7 @@ export class TableSubCategoriaComponent {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
+        this.spinner.hide();
       }
     );
   }
@@ -87,6 +90,7 @@ export class TableSubCategoriaComponent {
     Swal.fire({ title: '¿Estás seguro?', text: "¡No podrás revertir esto!", icon: 'warning', showCancelButton: true, confirmButtonColor: 'rgb(220,53,69)', cancelButtonColor: 'gray', confirmButtonText: 'Eliminar', cancelButtonText: 'Cancelar', reverseButtons: true })
       .then((result) => {
         if (result.isConfirmed) {
+          this.spinner.show();
           this.subCategoryService.deleteSubcategories(id).subscribe(
             result => {
               if (result.status) {
@@ -100,6 +104,7 @@ export class TableSubCategoriaComponent {
                   }
                 }
               }
+              this.spinner.hide();
             }
           );
         }

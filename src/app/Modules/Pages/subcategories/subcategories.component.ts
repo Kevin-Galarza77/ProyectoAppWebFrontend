@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { forkJoin, Observable } from 'rxjs';
 import { ProductosService } from 'src/app/Services/productos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-subcategories',
@@ -13,27 +16,51 @@ export class SubcategoriesComponent {
   id: any = this.route.snapshot.params['id'];
   nombreCategory:string='';
 
-  constructor(private productoService: ProductosService,
+  constructor(private productoService: ProductosService,private spinner:NgxSpinnerService,
     private route: ActivatedRoute) {
-      this.getSubcategories();
-      this.getCategory();
+      this.spinner.show();
+      forkJoin([
+        this.getSubcategories(),
+        this.getCategory()
+      ]).subscribe(
+        () => this.spinner.hide(),
+        (error) => {
+          console.log(error);
+          this.spinner.hide();
+        }
+      );
   }
 
 
 
-  getSubcategories() {
-    this.productoService.getSubCategorias(this.id).subscribe(
-      result => {
-        this.subcategories = result.data;
-      }
-    );
+  getSubcategories():Observable<any>{
+    return Observable.create((observer:any)=>{
+      this.productoService.getSubCategorias(this.id).subscribe(
+        result => {
+          this.subcategories = result.data;
+          observer.next();
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    })
   }
+  
   getCategory(){
-    this.productoService.getCategory(this.id).subscribe(
-      result=>{
-        this.nombreCategory=result.nombre;
-      }
-    );
+    return Observable.create((observer:any)=>{
+      this.productoService.getCategory(this.id).subscribe(
+        result=>{
+          this.nombreCategory=result.nombre;
+          observer.next();
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    })
   }
 
 

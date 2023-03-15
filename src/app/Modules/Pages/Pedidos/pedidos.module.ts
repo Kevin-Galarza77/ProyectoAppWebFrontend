@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidosComponent } from './pedidos.component';
 import { TablePedidosAdminComponent } from './table-pedidos-admin/table-pedidos-admin.component';
-import { TablePedidosClienteComponent } from './table-pedidos-cliente/table-pedidos-cliente.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +20,6 @@ import { MatDividerModule } from '@angular/material/divider';
   declarations: [
     PedidosComponent,
     TablePedidosAdminComponent,
-    TablePedidosClienteComponent,
     PedidoEstadoPipe,
     AccionarPedidoComponent
   ],

@@ -1,6 +1,7 @@
 import { Component , Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Auth/Services/auth.service';
 declare let alertify: any;
@@ -21,6 +22,7 @@ export class ChangePasswordComponent {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
+    private spinner:NgxSpinnerService,
     public dialogref: MatDialogRef<ChangePasswordComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
     private authService:AuthService
@@ -33,6 +35,7 @@ export class ChangePasswordComponent {
   }
   
   changePassword(){
+    this.spinner.show();
     this.authService.changePassword(this.userForm.value).subscribe(
       result=>{
         if (result.status) {
@@ -46,6 +49,7 @@ export class ChangePasswordComponent {
             }
           }
         }
+        this.spinner.hide();
       }
     )
   }

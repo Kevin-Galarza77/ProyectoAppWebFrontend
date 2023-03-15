@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { AuthService } from '../Services/auth.service';
 declare let alertify: any;
@@ -22,22 +23,23 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private router:Router) {
+    private router:Router,
+    private spinner:NgxSpinnerService) {
 
   }
 
   signIn() {
-
+    this.spinner.show();
     this.authService.login(this.loginForm.value).subscribe(
       result => {
         if (result.status) {
           Swal.fire({ position: 'center', icon: 'success', title: "Bienvenido", showConfirmButton: false, timer: 1500 });
-          this.router.navigateByUrl('/Home');
           localStorage.setItem('token',result.token);
           localStorage.setItem('rol',result.data.usuario.rol_id);
+          this.router.navigateByUrl('/Home/Inicio');
         } else {
           if (result.auth) {
-            this.router.navigateByUrl('/Home');
+            this.router.navigateByUrl('/Home/Inicio');
           }
           Swal.fire({icon: 'error',title: result.alert,confirmButtonColor: 'red',confirmButtonText: 'Cerrar'});
           if (result.messages.length !== 0) {
@@ -46,6 +48,7 @@ export class LoginComponent {
             }
           }
         }
+        this.spinner.hide();
       }
     )
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { RegisterService } from '../Services/register.service';
 declare let alertify: any;
@@ -27,7 +28,8 @@ export class RegisterComponent {
 
   constructor(private fb: FormBuilder,
     private registerUSer: RegisterService,
-    private router:Router) {
+    private router:Router,
+    private spinner:NgxSpinnerService) {
 
   }
 
@@ -41,7 +43,7 @@ export class RegisterComponent {
   }
 
   createUser() {
-
+    this.spinner.show();
     this.registerUSer.registerUser(this.userForm.value).subscribe(
       result => {
         if (result.status) {
@@ -56,9 +58,18 @@ export class RegisterComponent {
             }
           }
         }
+        this.spinner.hide();
       }
     );
-
   }
+
+  letterOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode < 32 || charCode > 32) && (charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
+      return false;
+    }
+    return true;
+  }
+
 
 }

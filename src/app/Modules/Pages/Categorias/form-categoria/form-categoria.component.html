@@ -4,7 +4,7 @@
     <div class="row">
         <mat-form-field class="col" appearance="fill">
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Ex. Cerveza" type="text" autocomplete="off" formControlName="nombre" required>
+            <input matInput placeholder="Ex. Cerveza" oninput="this.value = this.value.toUpperCase()" (keypress)="letterOnly($event)" type="text" autocomplete="off" formControlName="nombre" required>
         </mat-form-field>
         <div class="col d-flex flex-column">
             <label for="image" class="fs-6 mb-2">Imagen</label>

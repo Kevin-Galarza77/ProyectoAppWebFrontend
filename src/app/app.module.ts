@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -19,7 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './Modules/Auth/forgot-password/forgot-password.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +43,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     FormsModule,
     MatButtonModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

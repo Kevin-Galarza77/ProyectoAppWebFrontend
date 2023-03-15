@@ -9,15 +9,15 @@ export class PedidoEstadoPipe implements PipeTransform {
 
     switch (value) {
       case 1:
-        return 'Pendiente';
+        return 'PENDIENTE';
       case 2:
-        return 'Entregando';
+        return 'EN PROCESO';
       case 3:
-        return 'Entregado';
+        return 'ENTREGADO';
       case 4:
-        return 'Rechazado';
+        return 'RECHAZADO';
       default:
-        return 'None';
+        return 'NONE';
     }
 
   }

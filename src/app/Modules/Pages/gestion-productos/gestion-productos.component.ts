@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TableCategoriaComponent } from '../Categorias/table-categoria/table-categoria.component';
 import { FormProductosComponent } from './form-productos/form-productos.component';
+import { TableProductosComponent } from './table-productos/table-productos.component';
 
 @Component({
   selector: 'app-gestion-productos',
@@ -10,7 +10,7 @@ import { FormProductosComponent } from './form-productos/form-productos.componen
 })
 export class GestionProductosComponent  {
 
-  @ViewChild(TableCategoriaComponent) tableCategoria!:TableCategoriaComponent;
+  @ViewChild(TableProductosComponent) tableProductos!:TableProductosComponent;
 
   constructor(public dialog: MatDialog){
 
@@ -28,7 +28,7 @@ export class GestionProductosComponent  {
     dialogref.afterClosed().subscribe(
       result=>{
         if (result) {
-          this.tableCategoria.getAllCategorys();
+          this.tableProductos.getAllProductos();
         }
       }
     );

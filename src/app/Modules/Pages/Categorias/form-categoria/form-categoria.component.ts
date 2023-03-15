@@ -1,6 +1,7 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoriasService } from 'src/app/Services/categorias.service';
 import Swal from 'sweetalert2';
 declare let alertify: any;
@@ -30,7 +31,8 @@ export class FormCategoriaComponent {
   constructor(private fb:FormBuilder,
     private categoryService:CategoriasService,
     @Optional() public dialogref: MatDialogRef<FormCategoriaComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,){
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private spinner:NgxSpinnerService){
       if (data) {
         this.section = data.section;
         this.formCategory.setValue(data.category);
@@ -59,6 +61,7 @@ export class FormCategoriaComponent {
 
     if (this.section) {
       formData.append('imagen', this.fileToUpload);
+      this.spinner.show();
       this.categoryService.createCategorys(formData).subscribe(
         result=>{
           if (result.status) {
@@ -72,11 +75,13 @@ export class FormCategoriaComponent {
               }
             }
           }
+          this.spinner.hide();
         }
       );
     }else{
       if(this.fileToUpload) formData.append('imagen', this.fileToUpload);
       formData.append('public_id',this.formCategory.get('public_id')?.value);
+      this.spinner.show();
       this.categoryService.updateCategorys(formData,this.formCategory.value.id).subscribe(
         result=>{
           if (result.status) {
@@ -90,9 +95,18 @@ export class FormCategoriaComponent {
               }
             }
           }
+          this.spinner.hide();
         }
       );
     }
+  }
+
+  letterOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode < 32 || charCode > 32) && (charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
+      return false;
+    }
+    return true;
   }
 
   close(){

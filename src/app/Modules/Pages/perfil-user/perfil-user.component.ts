@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UsuariosService } from 'src/app/Services/usuarios.service';
 import Swal from 'sweetalert2';
 declare let alertify: any;
@@ -32,13 +33,14 @@ export class PerfilUSerComponent {
 
   EditUser:boolean=true;
 
-  constructor(private fb:FormBuilder,
+  constructor(private fb:FormBuilder,private spinner:NgxSpinnerService,
               private usuarioService:UsuariosService)
   {
     this.getInfoUser();  
   }
 
   updateUSer(){
+    this.spinner.show();
     this.usuarioService.updateUsuario(this.userForm.value).subscribe(
       result=>{
         if (result.status) {
@@ -53,11 +55,13 @@ export class PerfilUSerComponent {
             }
           }
         }
+        this.spinner.hide();
       }
     );
   }
 
   getInfoUser(){
+    this.spinner.show();
     const usuario_id = localStorage.getItem('usuario_id');
     this.usuarioService.getUsuario(usuario_id).subscribe(
       result=>{
@@ -77,6 +81,7 @@ export class PerfilUSerComponent {
         }else{
           Swal.fire({icon: 'error',title: result.alert,confirmButtonColor: 'red',confirmButtonText: 'Cerrar'});
         }
+        this.spinner.hide();
       }
     );
   }
@@ -89,5 +94,16 @@ export class PerfilUSerComponent {
     }
     return true;
   }
+
+  letterOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode < 32 || charCode > 32) && (charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
+      return false;
+    }
+    return true;
+  }
+
+  
+
 
 }

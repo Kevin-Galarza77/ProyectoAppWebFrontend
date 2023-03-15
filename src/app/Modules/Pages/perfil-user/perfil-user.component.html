@@ -50,7 +50,7 @@
             <div class="row">
                 <mat-form-field class="col" appearance="fill">
                     <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Ex. Juan Pablo Suarez Almeida" type="text" autocomplete="off" formControlName="Nombre_Usuario" required>
+                    <input matInput oninput="this.value = this.value.toUpperCase()" (keypress)="letterOnly($event)" placeholder="Ex. Juan Pablo Suarez Almeida" type="text" autocomplete="off" formControlName="Nombre_Usuario" required>
                 </mat-form-field>
             </div>
             <div class="row">
@@ -81,7 +81,7 @@
             <div class="row">
                 <mat-form-field class="col">
                     <mat-label>Dirección</mat-label>
-                    <textarea matInput placeholder="Ex. Calle Enriqueta..." formControlName="Direccion_Usuario"></textarea>
+                    <textarea matInput oninput="this.value = this.value.toUpperCase()" placeholder="Ex. Calle Enriqueta..." formControlName="Direccion_Usuario"></textarea>
                 </mat-form-field>
             </div>
             <mat-divider class="bg-danger mb-3"></mat-divider>

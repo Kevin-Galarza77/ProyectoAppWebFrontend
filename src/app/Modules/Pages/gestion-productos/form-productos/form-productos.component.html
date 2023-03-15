@@ -4,17 +4,17 @@
     <div class="row">
         <mat-form-field class="col" appearance="fill">
             <mat-label>Código del Producto</mat-label>
-            <input matInput placeholder="Ex. EHN5" type="text" autocomplete="off" formControlName="codigo_Producto" required>
+            <input matInput oninput="this.value = this.value.toUpperCase()" placeholder="Ex. EHN5" type="text" autocomplete="off" formControlName="codigo_Producto" required>
         </mat-form-field>
         <mat-form-field class="col" appearance="fill">
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Ex. Pilsener de Litro" type="text" autocomplete="off" formControlName="Nombre_Producto" required>
+            <input matInput oninput="this.value = this.value.toUpperCase()" placeholder="Ex. Pilsener de Litro" type="text" autocomplete="off" formControlName="Nombre_Producto" required>
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="col" appearance="fill">
             <mat-label>Stock</mat-label>
-            <input matInput placeholder="Ex. 50" type="number" min="1" autocomplete="off" formControlName="Stock_Producto" required>
+            <input matInput placeholder="Ex. 50" (keypress)="numberOnly($event)" type="number" min="1" autocomplete="off" formControlName="Stock_Producto" required>
         </mat-form-field>
         <mat-form-field class="col" appearance="fill">
             <mat-label>Precio</mat-label>
@@ -51,7 +51,7 @@
     <div class="row">
         <mat-form-field class="col">
             <mat-label>Descripción</mat-label>
-            <textarea matInput placeholder="Ex. 1x12 unidades" formControlName="Descripcion_Producto"></textarea>
+            <textarea matInput oninput="this.value = this.value.toUpperCase()" placeholder="Ex. 1x12 unidades" formControlName="Descripcion_Producto"></textarea>
         </mat-form-field>
     </div>
 

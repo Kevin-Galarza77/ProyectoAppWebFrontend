@@ -1,9 +1,9 @@
 <div class="subcategorias d-flex justify-content-around align-items-center flex-column">
-    <div class="d-flex flex-column w-75 justify-content-center align-items-center border-light border rounded-2" style="background-color: rgba(147, 147, 147, 0.2);">
-        <h2 class="text-light m-0 m-3 ms-4 fw-bolder text-center fs-3">{{ nombreCategory }}</h2>
-        <div class="row w-100 m-0 p-0 justify-content-center align-items-center mb-3">
-            <section class="subcategory d-flex justify-content-center align-items-center flex-column m-2 p-0 py-3 border border-light border-2 rounded-3" *ngFor="let subcategory of subcategories" [routerLink]="subcategory.id">
-                <h6 class="fs-5 text-white text-center m-2">{{ subcategory.nombre }}</h6>
+    <div class="d-flex flex-column w-75 justify-content-center align-items-center border-light border rounded-2" style="background-color: rgba(24, 24, 24, 0.503);">
+        <h2 class="text-light m-0 m-3 ms-4 fw-bolder text-center fs-2">{{ nombreCategory }}</h2>
+        <div class="row w-100 m-0 p-0 justify-content-center align-items-center mb-3 px-4">
+            <section style="min-height: 350px;" class="subcategory col d-flex justify-content-around align-items-center flex-column m-2 p-0 py-3 border border-light border-2 rounded-3" *ngFor="let subcategory of subcategories" [routerLink]="subcategory.id">
+                <h6 class="fs-3 text-white text-center m-2">{{ subcategory.nombre }}</h6>
                 <div class="text-center">
                     <img [src]="subcategory.url" class="w-75" alt="">
                 </div>

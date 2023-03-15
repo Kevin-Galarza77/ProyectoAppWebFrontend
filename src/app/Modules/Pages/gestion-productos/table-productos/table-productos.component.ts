@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductosService } from 'src/app/Services/productos.service';
 import Swal from 'sweetalert2';
 import { FormProductosComponent } from '../form-productos/form-productos.component';
@@ -22,7 +23,7 @@ export class TableProductosComponent implements AfterViewInit {
 
   productos: any[] = [];
 
-  constructor(private productosService: ProductosService,
+  constructor(private productosService: ProductosService,private spinner:NgxSpinnerService,
     public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.productos);
     this.getAllProductos();
@@ -42,15 +43,16 @@ export class TableProductosComponent implements AfterViewInit {
   }
 
   getAllProductos() {
+    this.spinner.show();
     this.productosService.getAllProducts().subscribe(
       result => {
         if (result.status) {
-          console.log(result.data);
           this.productos = result.data;
           this.dataSource = new MatTableDataSource(this.productos);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
+        this.spinner.hide();
       }
     );
   }
@@ -95,6 +97,7 @@ export class TableProductosComponent implements AfterViewInit {
     Swal.fire({ title: '¿Estás seguro?', text: "¡No podrás revertir esto!", icon: 'warning', showCancelButton: true, confirmButtonColor: 'rgb(220,53,69)', cancelButtonColor: 'gray', confirmButtonText: 'Eliminar', cancelButtonText: 'Cancelar', reverseButtons: true })
       .then((result) => {
         if (result.isConfirmed) {
+          this.spinner.show();
           this.productosService.deleteProducto(id).subscribe(
             result => {
               if (result.status) {
@@ -108,6 +111,7 @@ export class TableProductosComponent implements AfterViewInit {
                   }
                 }
               }
+              this.spinner.hide();
             }
           );
         }

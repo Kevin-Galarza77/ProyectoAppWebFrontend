@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../Services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 declare let alertify: any;
 
 
@@ -26,12 +27,14 @@ export class ResetPasswordComponent {
 
   constructor(private authService: AuthService, private router: Router,
     private fb: FormBuilder,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private spinner:NgxSpinnerService) {
 
   }
 
 
   resetPassword() {
+    this.spinner.show();
     this.authService.resetPassword(this.loginForm.value, this.token).subscribe(
       result => {
         if (result.status) {
@@ -45,6 +48,7 @@ export class ResetPasswordComponent {
             }
           }
         }
+        this.spinner.hide();
       }
     )
   }

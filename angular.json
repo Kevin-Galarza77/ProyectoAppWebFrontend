@@ -29,6 +29,7 @@
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "node_modules/alertifyjs/build/css/alertify.min.css",
                             "node_modules/alertifyjs/build/css/themes/bootstrap.min.css",
+                            "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
                             "src/styles.css"
                         ],
                         "scripts": [
@@ -103,6 +104,6 @@
         }
     },
     "cli": {
-      "analytics": "6d3ef3e1-8fba-4e9c-9834-acbf2da4e74b"
+        "analytics": "6d3ef3e1-8fba-4e9c-9834-acbf2da4e74b"
     }
 }

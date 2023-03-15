@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { AuthService } from '../Services/auth.service';
 declare let alertify: any;
@@ -14,12 +15,13 @@ export class ForgotPasswordComponent {
   email:string='';
 
 
-  constructor(private authService: AuthService, private router: Router){
+  constructor(private authService: AuthService, private router: Router,private spinner:NgxSpinnerService){
     
   }
 
 
   resetPassword(){
+    this.spinner.show();
     this.authService.forgotPassword(this.email).subscribe(
       result => {
         if (result.status) {
@@ -33,6 +35,7 @@ export class ForgotPasswordComponent {
             }
           }
         }
+        this.spinner.hide();
       }
     );
   }
