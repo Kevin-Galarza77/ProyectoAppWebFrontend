@@ -47,7 +47,6 @@ export class RegisterComponent {
     this.registerUSer.registerUser(this.userForm.value).subscribe(
       result => {
         if (result.status) {
-          localStorage.setItem('token', result.token);
           Swal.fire({ position: 'center', icon: 'success', title: result.alert , text:'Espera que el administrador acepte la activación de la cuenta.', confirmButtonColor:'green' });
           this.router.navigateByUrl('/Login');
         } else {

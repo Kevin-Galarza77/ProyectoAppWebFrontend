@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+import { CarService } from 'src/app/Services/car.service';
 
 @Component({
   selector: 'app-inicio',
@@ -14,8 +15,10 @@ export class InicioComponent implements OnInit {
   favoritesProducts:any[]=[];
   categories:any[]=[];
 
-  constructor(private productService:ProductosService,private spinner:NgxSpinnerService){
+  cars:any[]=[];
 
+  constructor(private productService:ProductosService,private spinner:NgxSpinnerService,private car:CarService){
+    this.cars = car.getCar();
   }
 
   ngOnInit(): void {
@@ -82,6 +85,33 @@ export class InicioComponent implements OnInit {
     console.log(id);
     if (maxStock < Number(input.value)) input.value = maxStock;
     input.focus();
+  }
+
+  addProducto(id:any){
+    const cantidad = Number((document.getElementById(id) as HTMLInputElement)?.value);
+    if (this.cars.some(p=>p.id===id)) {
+      if (cantidad>0) {
+        const index = this.cars.findIndex((p:any)=>p.id===id);
+        const foundProduct = this.favoritesProducts.find(p => p.id === id);
+        foundProduct.cantidad = cantidad;
+        this.cars.splice(index,1,foundProduct);
+        this.car.setCar(this.cars);
+        Swal.fire({ position: 'center', icon: 'success', title: 'Producto Actualizado', showConfirmButton: false, timer: 1000 });
+      }else{
+        const index = this.cars.findIndex((p:any)=>p.id===id);
+        this.cars.splice(index,1);
+        this.car.setCar(this.cars);
+        Swal.fire({ position: 'center', icon: 'success', title: 'Producto Eliminado', showConfirmButton: false, timer: 1000 });
+      }
+    }else{
+      if (cantidad > 0) {
+        const foundProduct = this.favoritesProducts.find(p => p.id === id);
+        foundProduct.cantidad = cantidad ;
+        this.cars.push(foundProduct);
+        this.car.setCar(this.cars);
+        Swal.fire({ position: 'center', icon: 'success', title: 'Producto agregado', showConfirmButton: false, timer: 1000 });
+      }
+    }
   }
 
 }

@@ -31,5 +31,10 @@ export class PedidosService {
     return this.http.put(`${GLOBAL.url}pedidos/updateEstado?cabezara_id=${id}&estado=${estado}`,{},{ headers });
   }
 
+  createPedido(pedido:any): Observable<any> {
+    const headers = this.hearders();
+    return this.http.post(`${GLOBAL.url}pedidos`,pedido,{ headers });
+  }
+
 
 }

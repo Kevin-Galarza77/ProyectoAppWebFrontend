@@ -1,0 +1,69 @@
+<div class="p-5 d-flex justify-content-center align-content-center flex-column">
+    <p class="display-3 text-center text-light m-0">Carrito de Compras</p>
+    <mat-divider class="w-100 bg-light mt-1 mb-4"></mat-divider>
+    <div *ngIf="cars.length === 0" style="background-color: rgba(0, 0, 0, 0.4);" class="rounded-end-3 border border-light border-2 p-4 mb-4 d-flex justify-content-center align-items-center flex-column w-100">
+        <p class="text-center text-danger fs-4 fw-bolder p-0 m-0">No has seleccionado ningun producto</p>
+    </div>
+
+    <div *ngIf="cars.length !== 0" style="background-color: rgba(0, 0, 0, 0.4);" class="rounded-end-3 border border-light border-2 p-4 mb-4 d-flex justify-content-center align-items-center flex-column w-100">
+        <div *ngFor="let car of cars" class="row w-75 m-1">
+            <div class="col d-flex justify-content-center align-items-center">
+                <img [src]="car.url" style="height: 100px; width: 100px;">
+            </div>
+            <div class="col d-flex justify-content-center align-items-center flex-column">
+                <div class="d-flex w-100 justify-content-between align-items-center text-light fw-bolder fs-5">X {{ car.Nombre_Producto }}</div>
+            </div>
+            <div class="col d-flex justify-content-center align-items-center flex-column">
+                <div class="d-flex w-100 justify-content-between align-items-center text-light"><span class="fw-bolder">Cantidad</span><span>X {{ car.cantidad }}</span> </div>
+                <div class="d-flex w-100 justify-content-between align-items-center text-light"><span class="fw-bolder">Unidad</span><span>${{ car.Precio_Producto }}</span></div>
+                <div class="d-flex w-100 justify-content-between align-items-center text-light"><span class="fw-bolder">Detalle</span><span>${{ car.cantidad * car.Precio_Producto }}</span></div>
+            </div>
+            <div class="col p-0 m-1 flex-nowrap">
+                <div class="col d-flex justify-content-center align-items-center p-0">
+                    <button (click)="decreaseProduct(car.id)" class="col-3 m-1 btn btn-light rounded-circle d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
+                        -
+                    </button>
+                    <input (keypress)="maxvalue(car.id,car.Stock_Producto)" [id]="car.id" class="col-3 m-1 text-center" type="number" min="0" [max]="car.Stock_Producto" style="min-width: 50px;" [value]="car.cantidad">
+                    <button (click)="incrementProduct(car.id,car.Stock_Producto)" class="col-3 m-1 btn btn-light rounded-circle d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
+                        +
+                    </button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center my-2 p-0">
+                    <button (click)="addProducto(car.id)" class="btn btn-light btn-sm w-100">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around align-items-center">
+        <p class="fw-bolder fs-4 text-light">TOTAL</p>
+        <p class="fs-4 text-light">${{ pedidoForm.value.Total_Pago_NotaVenta }}</p>
+    </div>
+    <form [formGroup]="pedidoForm" class="d-flex justify-content-center align-items-center flex-column my-3" (ngSubmit)="createPedido()">
+        <div class="row w-100">
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>FORMA DE PAGO</mat-label>
+                <mat-select formControlName="Tipo_Pago_NotaVenta" required>
+                    <mat-option [value]="'Efectivo'">EFECTIVO</mat-option>
+                    <mat-option [value]="'Credito'">CREDITO</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>DIRECCIÓN</mat-label>
+                <mat-select formControlName="tipo_entrega__pedido_id" required>
+                    <mat-option [value]="1">LOCAL</mat-option>
+                    <mat-option [value]="2">OTRO</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="pedidoForm.value.tipo_entrega__pedido_id == 2 " class="row w-100">
+            <div class="col"></div>
+            <mat-form-field class="col">
+                <mat-label>Dirección</mat-label>
+                <textarea oninput="this.value = this.value.toUpperCase()" matInput placeholder="Ex. Calle Enriqueta..." formControlName="Direccion_NotaVenta"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center align-items-center w-100">
+            <button class="btn btn-success px-5">Confirmar Pedido</button>
+        </div>
+    </form>
+</div>

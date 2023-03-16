@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CarService } from 'src/app/Services/car.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Auth/Services/auth.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
@@ -20,6 +21,7 @@ export class HomeComponent {
   constructor(private authService: AuthService,
     private router: Router,
     private spinner:NgxSpinnerService,
+    public car:CarService,
     public dialog: MatDialog) {
       const rol = Number(localStorage.getItem('rol'));
       if (rol === 1) this.admin=true;

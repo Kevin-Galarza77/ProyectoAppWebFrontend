@@ -37,6 +37,7 @@ export class LoginComponent {
           localStorage.setItem('token',result.token);
           localStorage.setItem('rol',result.data.usuario.rol_id);
           localStorage.setItem('user_id',result.data.id);
+          localStorage.setItem('car',JSON.stringify([]));
           setTimeout(() => {
             this.router.navigateByUrl('/Home/Inicio');
           }, 1000);
@@ -50,9 +51,7 @@ export class LoginComponent {
         }
         this.spinner.hide();
       }
-    )
-
-
+    );
   }
 
 

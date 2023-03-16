@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from 'src/app/Services/guards/auth.guard';
+import { CarritoComprasComponent } from './Carrito-Compras/carrito-compras.component';
 import { CategoriasComponent } from './Categorias/categorias.component';
 import { GestionProductosComponent } from './gestion-productos/gestion-productos.component';
 import { GestionUsuariosComponent } from './Gestion-usuarios/gestion-usuarios.component';
@@ -60,6 +61,11 @@ const PAGES_ROUTES: Routes = [
                 path: 'Usuarios', component: GestionUsuariosComponent,
                //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
                 loadChildren: () => import('./Gestion-usuarios/gestion-usuarios.module').then(m => m.GestionUsuariosModule)
+            },
+            {
+                path: 'Car', component: CarritoComprasComponent,
+               //  canLoad: [RolControlGuard], data: { roles: [1, 2, 3, 4, 5, 6, 7, 8] },
+                loadChildren: () => import('./Carrito-Compras/carrito-compras.module').then(m => m.CarritoComprasModule)
             },
             { path: '**', pathMatch: 'full', redirectTo: '' }
         ]
