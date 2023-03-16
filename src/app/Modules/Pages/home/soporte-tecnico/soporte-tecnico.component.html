@@ -1,0 +1,16 @@
+<form [formGroup]="userForm" class="d-flex justify-content-center align-items-center flex-column p-4" (submit)="sendMessege()">
+    <p class="display-6">Informar Problema</p>
+    <mat-divider class="w-100"></mat-divider>
+    <mat-form-field class="col w-100" appearance="fill">
+        <mat-label>USUARIO</mat-label>
+        <input matInput oninput="this.value = this.value.toUpperCase()" readonly type="text" autocomplete="off" formControlName="nombre" required>
+    </mat-form-field>
+    <mat-form-field class="col w-100">
+        <mat-label>MENSAJE</mat-label>
+        <textarea oninput="this.value = this.value.toUpperCase()" matInput placeholder="Ex. Calle Enriqueta..." formControlName="mensaje"></textarea>
+    </mat-form-field>
+    <div class="d-flex justify-content-around align-items-center w-100">
+        <button (click)="close()" type="button" class="btn px-4 btn-dark">Cancelar</button>
+        <button type="submit" class="btn btn-danger px-4">Enviar</button>
+    </div>
+</form>

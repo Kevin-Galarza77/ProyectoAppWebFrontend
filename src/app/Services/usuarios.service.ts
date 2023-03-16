@@ -15,7 +15,7 @@ export class UsuariosService {
     return { Authorization: `Bearer ${token}` };
   }
 
-  getUsuario(id: any): Observable<any> {
+  getUsuario(): Observable<any> {
     const headers = this.hearders();
     const user_id = localStorage.getItem('user_id');
     return this.http.get(`${GLOBAL.url}usuarios/${user_id}`, { headers });

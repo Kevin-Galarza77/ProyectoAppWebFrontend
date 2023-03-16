@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Auth/Services/auth.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { SoporteTecnicoTableComponent } from './soporte-tecnico-table/soporte-tecnico-table.component';
+import { SoporteTecnicoComponent } from './soporte-tecnico/soporte-tecnico.component';
 
 @Component({
   selector: 'app-home',
@@ -53,8 +55,24 @@ export class HomeComponent {
       minWidth: '300px',
       minHeight: '250px'
     });
-
-
   }
 
+  soporteTecnico(){
+    const sendMessege = this.dialog.open(SoporteTecnicoComponent, {
+      height: 'auto',
+      width: '30%',
+      minWidth: '300px',
+      minHeight: '250px'
+    });
+  }
+
+  soporteTecnicoList(){
+    const sendMessege = this.dialog.open(SoporteTecnicoTableComponent, {
+      height: 'auto',
+      width: '50%',
+      minWidth: '300px',
+      minHeight: '250px'
+    });
+  }
+  
 }

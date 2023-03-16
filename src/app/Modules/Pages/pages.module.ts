@@ -11,12 +11,18 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { SoporteTecnicoComponent } from './home/soporte-tecnico/soporte-tecnico.component';
+import { SoporteTecnicoTableComponent } from './home/soporte-tecnico-table/soporte-tecnico-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SoporteTecnicoComponent,
+    SoporteTecnicoTableComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +34,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatDividerModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class PagesModule { }

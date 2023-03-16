@@ -1,0 +1,42 @@
+<div class="p-4 rounded-3 m-3 mb-4 border border-light">
+    <p class="display-6 text-center">Reportes</p>
+    <mat-divider class="w-100"></mat-divider>
+
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Login" #input>
+    </mat-form-field>
+
+    <div class="mb-4">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <ng-container matColumnDef="Usuario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-secondary text-light fs-5"> Usuario </th>
+                <td mat-cell *matCellDef="let row"> {{row.usuario.Nombre_Usuario}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Mensaje">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-secondary text-light fs-5"> Mensaje </th>
+                <td mat-cell *matCellDef="let row"> {{row.message}} </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                    <p class="text-center">No existen registros</p>
+                </td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+    </div>
+    <div class="w-100 d-flex justify-content-center align-items-center">
+        <button class="btn btn-dark px-5" (click)="close()">Cerrar</button>
+    </div>
+</div>

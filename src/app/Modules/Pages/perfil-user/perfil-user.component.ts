@@ -63,8 +63,7 @@ export class PerfilUSerComponent {
 
   getInfoUser(){
     this.spinner.show();
-    const usuario_id = localStorage.getItem('usuario_id');
-    this.usuarioService.getUsuario(usuario_id).subscribe(
+    this.usuarioService.getUsuario().subscribe(
       result=>{
 
         if (result.status) {
