@@ -104,7 +104,19 @@ export class CarritoComprasComponent implements OnInit {
     this.pedidoService.createPedido(this.pedidoForm.value).subscribe(
       result => {
         if (result.status) {
-          Swal.fire({ position: 'center', icon: 'success', title: result.alert , text:'Espera que el administrador acepte la activación de la cuenta.', confirmButtonColor:'green' });
+          Swal.fire({ position: 'center', icon: 'success', title: result.alert , confirmButtonColor:'green' });
+          this.cars=[];
+          this.car.setCar([]);
+          this.pedidoForm.setValue(
+            {
+              Tipo_Pago_NotaVenta: '',
+              Total_Pago_NotaVenta: 0,
+              Direccion_NotaVenta: '',
+              user_id: localStorage.getItem('user_id'),
+              tipo_entrega__pedido_id: '',
+              detalles: [],
+            }
+          );
         } else {
           Swal.fire({ icon: 'error', title: result.alert, confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
           if (result.messages.length !== 0) {
@@ -114,6 +126,21 @@ export class CarritoComprasComponent implements OnInit {
           }
         }
         this.spinner.hide();
+      }
+    );
+  }
+
+  setCarrito(){
+    this.cars=[];
+    this.car.setCar([]);
+    this.pedidoForm.setValue(
+      {
+        Tipo_Pago_NotaVenta: '',
+        Total_Pago_NotaVenta: 0,
+        Direccion_NotaVenta: '',
+        user_id: localStorage.getItem('user_id'),
+        tipo_entrega__pedido_id: '',
+        detalles: [],
       }
     );
   }

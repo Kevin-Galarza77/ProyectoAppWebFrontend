@@ -21,6 +21,7 @@ export class ProductosComponent {
 
   constructor(private productoService: ProductosService,private spinner:NgxSpinnerService,private car:CarService,
     private route: ActivatedRoute) {
+      this.cars = car.getCar();
       this.spinner.show();
       forkJoin([
         this.getProductos(),
@@ -32,7 +33,6 @@ export class ProductosComponent {
           this.spinner.hide();
         }
       );
-
   }
 
 
@@ -82,7 +82,6 @@ export class ProductosComponent {
 
   maxvalue(id: any, maxStock: any) {
     const input = document.getElementById(id) as HTMLInputElement;
-    console.log(id);
     if (maxStock < Number(input.value)) input.value = maxStock;
     input.focus();
   }
