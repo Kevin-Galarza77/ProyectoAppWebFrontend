@@ -13,11 +13,11 @@ declare let alertify: any;
   templateUrl: './form-productos.component.html',
   styleUrls: ['./form-productos.component.css']
 })
-export class FormProductosComponent{
+export class FormProductosComponent {
 
-  section:boolean = true;
+  section: boolean = true;
 
-  categorys:any[]=[];
+  categorys: any[] = [];
   subCategorys: any[] = [];
 
   formProducto: FormGroup = this.fb.group({
@@ -28,29 +28,29 @@ export class FormProductosComponent{
     Descripcion_Producto: ['', Validators.required],
     imagen: [null, [Validators.required, Validators.pattern(/^.*\.(png|jpg|jpeg)$/)]],
     url: [''],
-    id:[''],
-    public_id:[''],
-    subCategoria_id:[null, Validators.required],
+    id: [''],
+    public_id: [''],
+    subCategoria_id: [null, Validators.required],
     categoria_id: [null, Validators.required]
   });
 
   fileToUpload!: File;
 
-  
 
-  constructor(private fb:FormBuilder,
-    private categoryService:CategoriasService,
+
+  constructor(private fb: FormBuilder,
+    private categoryService: CategoriasService,
     private subCategoryService: SubCategoriasService,
-    private prodcutoService:ProductosService,
-    private spinner:NgxSpinnerService,
+    private prodcutoService: ProductosService,
+    private spinner: NgxSpinnerService,
     @Optional() public dialogref: MatDialogRef<FormProductosComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any){
-      this.getAllCategorys();
-      if (data) {
-        this.section = data.section;
-        this.formProducto.setValue(data.subCategory);
-        this.getAllSubCategorys(this.formProducto.value.categoria_id);
-      }
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.getAllCategorys();
+    if (data) {
+      this.section = data.section;
+      this.formProducto.setValue(data.subCategory);
+      this.getAllSubCategorys(this.formProducto.value.categoria_id);
+    }
   }
 
   onFileSelected(event: any) {
@@ -60,7 +60,7 @@ export class FormProductosComponent{
         this.fileToUpload = file;
       } else {
         this.formProducto.get('imagen')?.setValue(null);
-        Swal.fire({ icon: 'error', title:'El archivo debe ser una imagen', confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
+        Swal.fire({ icon: 'error', title: 'El archivo debe ser una imagen', confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
       }
     }
   }
@@ -73,11 +73,16 @@ export class FormProductosComponent{
           this.categorys = result.data;
         }
         this.spinner.hide();
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+        Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
       }
     );
   }
 
-  getAllSubCategorys(category_id:any) {
+  getAllSubCategorys(category_id: any) {
     this.spinner.show();
     this.subCategoryService.getAllSubcategoriesForID(category_id).subscribe(
       result => {
@@ -85,12 +90,17 @@ export class FormProductosComponent{
           this.subCategorys = result.data;
         }
         this.spinner.hide();
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+        Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
       }
     );
   }
 
 
-  createEditProducto(){
+  createEditProducto() {
 
     const formData = new FormData();
 
@@ -105,11 +115,11 @@ export class FormProductosComponent{
       formData.append('imagen', this.fileToUpload);
       this.spinner.show();
       this.prodcutoService.createProducto(formData).subscribe(
-        result=>{
+        result => {
           if (result.status) {
-            Swal.fire({ position: 'center', icon: 'success', title: result.alert, confirmButtonColor:'green' });
+            Swal.fire({ position: 'center', icon: 'success', title: result.alert, confirmButtonColor: 'green' });
             this.dialogref.close('rerender');
-          }else{
+          } else {
             Swal.fire({ icon: 'error', title: result.alert, confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
             if (result.messages.length !== 0) {
               for (let i = 0; i < result.messages.length; i++) {
@@ -118,18 +128,23 @@ export class FormProductosComponent{
             }
           }
           this.spinner.hide();
+        },
+        (error) => {
+          console.log(error);
+          this.spinner.hide();
+          Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
         }
       );
-    }else{
-      if(this.fileToUpload) formData.append('imagen', this.fileToUpload);
-      formData.append('public_id',this.formProducto.get('public_id')?.value);
+    } else {
+      if (this.fileToUpload) formData.append('imagen', this.fileToUpload);
+      formData.append('public_id', this.formProducto.get('public_id')?.value);
       this.spinner.show();
-      this.prodcutoService.updateProducto(formData,this.formProducto.value.id).subscribe(
-        result=>{
+      this.prodcutoService.updateProducto(formData, this.formProducto.value.id).subscribe(
+        result => {
           if (result.status) {
-            Swal.fire({ position: 'center', icon: 'success', title: result.alert, confirmButtonColor:'green' });
+            Swal.fire({ position: 'center', icon: 'success', title: result.alert, confirmButtonColor: 'green' });
             this.dialogref.close('rerender');
-          }else{
+          } else {
             Swal.fire({ icon: 'error', title: result.alert, confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
             if (result.messages.length !== 0) {
               for (let i = 0; i < result.messages.length; i++) {
@@ -138,16 +153,21 @@ export class FormProductosComponent{
             }
           }
           this.spinner.hide();
+        },
+        (error) => {
+          console.log(error);
+          this.spinner.hide();
+          Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
         }
       );
     }
   }
 
-  close(){
+  close() {
     this.dialogref.close();
   }
 
-  numberOnly(event:any): boolean {
+  numberOnly(event: any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;

@@ -57,6 +57,11 @@ export class PerfilUSerComponent {
           }
         }
         this.spinner.hide();
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+        Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
       }
     );
   }
@@ -83,6 +88,11 @@ export class PerfilUSerComponent {
           Swal.fire({icon: 'error',title: result.alert,confirmButtonColor: 'red',confirmButtonText: 'Cerrar'});
         }
         this.spinner.hide();
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+        Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
       }
     );
   }

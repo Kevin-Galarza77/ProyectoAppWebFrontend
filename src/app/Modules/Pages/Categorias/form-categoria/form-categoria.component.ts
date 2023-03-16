@@ -76,6 +76,11 @@ export class FormCategoriaComponent {
             }
           }
           this.spinner.hide();
+        },
+        (error) => {
+          console.log(error);
+          this.spinner.hide();
+          Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
         }
       );
     }else{
@@ -96,6 +101,11 @@ export class FormCategoriaComponent {
             }
           }
           this.spinner.hide();
+        },
+        (error) => {
+          console.log(error);
+          this.spinner.hide();
+          Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
         }
       );
     }

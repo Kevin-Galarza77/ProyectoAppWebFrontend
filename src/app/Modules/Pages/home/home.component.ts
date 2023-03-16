@@ -33,6 +33,8 @@ export class HomeComponent {
       if (result.status) {
         localStorage.removeItem('token');
         localStorage.removeItem('rol');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('car');
         Swal.fire({ position: 'center', icon: 'success', title: result.alert, showConfirmButton: false, timer: 2500 });
         this.router.navigateByUrl('/Login');
       } else {
@@ -45,6 +47,8 @@ export class HomeComponent {
       console.log(error);
       localStorage.removeItem('token');
       localStorage.removeItem('rol');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('car');
       this.router.navigateByUrl('/Login');
     });
 

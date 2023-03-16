@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PedidosService } from 'src/app/Services/pedidos.service';
+import Swal from 'sweetalert2';
 import { AccionarPedidoComponent } from '../accionar-pedido/accionar-pedido.component';
 declare let alertify: any;
 
@@ -60,6 +61,11 @@ export class TablePedidosAdminComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.spinner.hide();
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+        Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
       }
     );
   }
@@ -76,6 +82,11 @@ export class TablePedidosAdminComponent implements AfterViewInit {
           this.dataSource.sort = this.sort;
         }
         this.spinner.hide();
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+        Swal.fire({ position: 'center', icon: 'error', title: "Se ha producido un error", confirmButtonColor: 'rgb(220,53,69)' });
       }
     );
   }
