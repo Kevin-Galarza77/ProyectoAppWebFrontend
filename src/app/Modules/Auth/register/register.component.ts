@@ -22,6 +22,7 @@ export class RegisterComponent {
     FechaNacimiento_Usuario: ['', Validators.required],//
     Cel_Usuario: ['', Validators.required],//
     Direccion_Usuario: ['', Validators.required],
+    opcion:[true]
   });
 
   hide: boolean = true;
