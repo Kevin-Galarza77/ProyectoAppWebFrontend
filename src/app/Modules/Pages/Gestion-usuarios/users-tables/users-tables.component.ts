@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuariosService } from 'src/app/Services/usuarios.service';
 import Swal from 'sweetalert2';
@@ -24,7 +25,7 @@ export class UsersTablesComponent implements AfterViewInit {
 
   usuarios: any[] = [];
 
-  constructor(private productosService: ProductosService,
+  constructor(private spinner: NgxSpinnerService,
     private userService: UsuariosService,
     public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.usuarios);
@@ -46,6 +47,7 @@ export class UsersTablesComponent implements AfterViewInit {
 
 
   getAllUsers() {
+    this.spinner.show();
     this.userService.geAlltUsuario().subscribe(
       result => {
         this.usuarios = result;
@@ -53,6 +55,7 @@ export class UsersTablesComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource(this.usuarios);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.spinner.hide();
       }
     );
   }

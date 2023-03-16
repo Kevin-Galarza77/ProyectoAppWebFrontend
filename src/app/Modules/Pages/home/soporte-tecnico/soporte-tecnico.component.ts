@@ -53,6 +53,7 @@ export class SoporteTecnicoComponent {
       result=>{
         if (result.status) {
           Swal.fire({ position: 'center', icon: 'success', title: result.alert , confirmButtonColor:'green' });
+          this.dialogref.close();
         } else {
           Swal.fire({ icon: 'error', title: result.alert, confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
           if (result.messages.length !== 0) {
