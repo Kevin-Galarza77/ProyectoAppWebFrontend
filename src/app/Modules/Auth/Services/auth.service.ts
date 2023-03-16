@@ -32,9 +32,10 @@ export class AuthService {
   changePassword(user:any): Observable<any> {
 
     const token = localStorage.getItem('token');
+    const user_id = localStorage.getItem('user_id');
     const headers = { Authorization: `Bearer ${token}` }
 
-    return this.http.put(`${GLOBAL.url}user/${token}`, user , { headers });
+    return this.http.put(`${GLOBAL.url}user/${user_id}`, user , { headers });
 
   }
 

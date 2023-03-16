@@ -8,8 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class PedidosService {
 
-  token: string = String(localStorage.getItem('token'));
-
   constructor(private http: HttpClient) { }
 
   hearders() {
@@ -24,8 +22,8 @@ export class PedidosService {
 
   getPedidosForUser(): Observable<any> {
     const headers = this.hearders();
-    const token = localStorage.getItem('token');
-    return this.http.get(`${GLOBAL.url}pedidos/ForUserId?token=${token}`,{ headers });
+    const user_id = localStorage.getItem('user_id');
+    return this.http.get(`${GLOBAL.url}pedidos/ForUserId?user_id=${user_id}`,{ headers });
   }
 
   updateEstadoPedidos(id:any,estado:any): Observable<any> {

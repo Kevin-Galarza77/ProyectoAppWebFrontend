@@ -33,14 +33,14 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe(
       result => {
         if (result.status) {
-          Swal.fire({ position: 'center', icon: 'success', title: "Bienvenido", showConfirmButton: false, timer: 1500 });
+          Swal.fire({ position: 'center', icon: 'success', title: result.alert, showConfirmButton: false, timer: 1500 });
           localStorage.setItem('token',result.token);
           localStorage.setItem('rol',result.data.usuario.rol_id);
-          this.router.navigateByUrl('/Home/Inicio');
-        } else {
-          if (result.auth) {
+          localStorage.setItem('user_id',result.data.id);
+          setTimeout(() => {
             this.router.navigateByUrl('/Home/Inicio');
-          }
+          }, 1000);
+        } else {
           Swal.fire({icon: 'error',title: result.alert,confirmButtonColor: 'red',confirmButtonText: 'Cerrar'});
           if (result.messages.length !== 0) {
             for (let i = 0; i < result.messages.length; i++) {

@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { EstadouserPipe } from './estadouser.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -33,7 +34,8 @@ import { EstadouserPipe } from './estadouser.pipe';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule
   ]
 })
 export class GestionUsuariosModule { }

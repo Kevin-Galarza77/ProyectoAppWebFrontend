@@ -20,6 +20,7 @@ export class PerfilUSerComponent {
     FechaNacimiento_Usuario: ['', Validators.required],
     Cel_Usuario: ['', Validators.required],
     Direccion_Usuario: ['', Validators.required],
+    opcion:[false]
   });
 
   usuario:any = {
@@ -73,6 +74,7 @@ export class PerfilUSerComponent {
           this.usuario.FechaNacimiento_Usuario = result.data.FechaNacimiento_Usuario;
           this.usuario.Nombre_Usuario = result.data.Nombre_Usuario;
           this.usuario.email = result.data.user.email;
+          this.usuario.opcion = false;
 
           this.userForm.setValue(
             this.usuario

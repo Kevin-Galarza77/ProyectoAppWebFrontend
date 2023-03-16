@@ -1,1 +1,80 @@
-<p>users-form works!</p>
+<div class="d-flex justify-content-center align-items-center flex-column">
+    <p class="text-center display-6 mt-3 m-0">{{ section ? 'Nuevo Usuario' : 'Editar Usuario' }}</p>
+    <mat-divider style="width: 98%;" class="my-3"></mat-divider>
+    <form [formGroup]="userForm" class="d-flex flex-column mb-3 w-100 px-5" (ngSubmit)="createUser()">
+        <div class="row">
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>NOMBRE</mat-label>
+                <input matInput oninput="this.value = this.value.toUpperCase()" (keypress)="letterOnly($event)" placeholder="Ex. Juan Pablo Suarez Almeida" type="text" autocomplete="off" formControlName="Nombre_Usuario" required>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>CÉDULA</mat-label>
+                <input (keypress)="numberOnly($event)" maxlength="10" placeholder="Ex. 1753256359" matInput type="tel" autocomplete="off" formControlName="CI_Usuario" required>
+            </mat-form-field>
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>FECHA DE NACIMIENTO</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Ex. 06/18/2002" readonly formControlName="FechaNacimiento_Usuario" required>
+                <mat-hint class="text-light">MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>CORREO ELÉCTRONICO</mat-label>
+                <input matInput type="email" placeholder="Ex. lanenita@gmail.com" autocomplete="off" formControlName="email" required>
+            </mat-form-field>
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>CÉLULAR</mat-label>
+                <input (keypress)="numberOnly($event)" maxlength="10" matInput type="tel" placeholder="Ex. 091848821" autocomplete="off" formControlName="Cel_Usuario" required>
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+        </div>
+        <p *ngIf="userForm.value.password !== userForm.value.repeat_password && userForm.valid" class="text-danger" style="font-size: 12px;">**Las constraseñas no coinciden</p>
+        <div class="row">
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>ESTADO</mat-label>
+                <mat-select formControlName="estado_users" required>
+                    <mat-option [value]="1">ACTIVO</mat-option>
+                    <mat-option [value]="2">INACTIVO</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>ROL</mat-label>
+                <mat-select formControlName="rol_id" required>
+                    <mat-option [value]="1">ADMINISTRADOR</mat-option>
+                    <mat-option [value]="2">CLIENTE</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="section" class="row">
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>CONTRASEÑA</mat-label>
+                <input minlength="6" matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field class="col" appearance="fill">
+                <mat-label>Repetir Contraseña</mat-label>
+                <input minlength="6" matInput [type]="hide ? 'password' : 'text'" formControlName="repeat_password" required>
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="col">
+                <mat-label>Dirección</mat-label>
+                <textarea oninput="this.value = this.value.toUpperCase()" matInput placeholder="Ex. Calle Enriqueta..." formControlName="Direccion_Usuario"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-around flex-wrap align-items-center flex-row">
+            <button (click)="close()" type="button" class="btn btn-secondary m-1 px-4">Cancelar</button>
+            <button type="submit" class="btn btn-danger m-1 px-4">{{ section? 'Registrar' : 'Editar Usuario' }}</button>
+        </div>
+    </form>
+</div>

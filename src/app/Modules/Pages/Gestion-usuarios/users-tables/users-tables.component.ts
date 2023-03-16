@@ -6,7 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuariosService } from 'src/app/Services/usuarios.service';
 import Swal from 'sweetalert2';
-import { FormProductosComponent } from '../../gestion-productos/form-productos/form-productos.component'; 
+import { FormProductosComponent } from '../../gestion-productos/form-productos/form-productos.component';
+import { UsersFormComponent } from '../users-form/users-form.component';
 declare let alertify: any;
 
 @Component({
@@ -15,7 +16,7 @@ declare let alertify: any;
   styleUrls: ['./users-tables.component.css']
 })
 export class UsersTablesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['Accion', 'Cedula', 'Nombre', 'Contacto', 'Fecha de Nacimiento', 'Direccion','Estado'];
+  displayedColumns: string[] = ['Accion', 'Cedula', 'Nombre', 'Email', 'Contacto', 'Fecha de Nacimiento', 'Direccion', 'Estado'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -24,7 +25,7 @@ export class UsersTablesComponent implements AfterViewInit {
   usuarios: any[] = [];
 
   constructor(private productosService: ProductosService,
-    private userService:UsuariosService,
+    private userService: UsuariosService,
     public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.usuarios);
     this.getAllUsers();
@@ -43,12 +44,12 @@ export class UsersTablesComponent implements AfterViewInit {
     }
   }
 
- 
-  getAllUsers(){
+
+  getAllUsers() {
     this.userService.geAlltUsuario().subscribe(
-      result=>{
+      result => {
         this.usuarios = result;
-        this.usuarios.sort((a, b) => b.user.estado_users - a.user.estado_users );
+        this.usuarios.sort((a, b) => b.user.estado_users - a.user.estado_users);
         this.dataSource = new MatTableDataSource(this.usuarios);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -56,34 +57,46 @@ export class UsersTablesComponent implements AfterViewInit {
     );
   }
 
-  updateEstadoUser(id:any,estado:any){
-    const userinfo = {
-      estado_users:estado,
-      user_id:id
-    }
+  createEditCategoria(userEdit: any) {
 
-    this.userService.updateEstadoUsuario(userinfo).subscribe(
-      result=>{
-        if (result.status) {
-          Swal.fire({ position: 'center', icon: 'success', title: result.alert, confirmButtonColor:'green' });
+    const user: any = {};
+
+    user.email=userEdit.user.email;
+    user.password='';
+    user.repeat_password='';
+    user.CI_Usuario=userEdit.CI_Usuario;
+    user.Nombre_Usuario=userEdit.Nombre_Usuario;
+    user.FechaNacimiento_Usuario=userEdit.FechaNacimiento_Usuario;
+    user.Cel_Usuario=userEdit.Cel_Usuario;
+    user.Direccion_Usuario=userEdit.Direccion_Usuario;
+    user.estado_users=userEdit.user.estado_users;
+    user.rol_id=userEdit.rol_id;
+    user.opcion=true;
+    user.user_id=userEdit.user.id;
+
+
+
+    const dialogref = this.dialog.open(UsersFormComponent, {
+      height: 'auto',
+      width: '50%',
+      minWidth: '300px',
+      minHeight: '250px',
+      data: {
+        section: false,
+        user: user
+      }
+    });
+
+    dialogref.afterClosed().subscribe(
+      result => {
+        if (result) {
           this.getAllUsers();
-        }else{
-          Swal.fire({ icon: 'error', title: result.alert, confirmButtonColor: 'red', confirmButtonText: 'Cerrar' });
-          if (result.messages.length !== 0) {
-            for (let i = 0; i < result.messages.length; i++) {
-              alertify.error(result.messages[i]);
-            }
-          }
         }
       }
     );
 
-
-
   }
 
- 
- 
 
 }
 

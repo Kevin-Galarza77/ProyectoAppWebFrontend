@@ -8,8 +8,6 @@ import { GLOBAL } from './global.service';
 })
 export class UsuariosService {
 
-  token:string = String(localStorage.getItem('token'));
-
   constructor(private http: HttpClient) { }
 
   hearders() {
@@ -19,7 +17,8 @@ export class UsuariosService {
 
   getUsuario(id: any): Observable<any> {
     const headers = this.hearders();
-    return this.http.get(`${GLOBAL.url}usuarios/${this.token}`, { headers });
+    const user_id = localStorage.getItem('user_id');
+    return this.http.get(`${GLOBAL.url}usuarios/${user_id}`, { headers });
   }
 
   geAlltUsuario(): Observable<any> {
@@ -29,12 +28,18 @@ export class UsuariosService {
 
   updateUsuario(usuario:any): Observable<any>{
     const headers = this.hearders();
-    return this.http.put(`${GLOBAL.url}usuarios/${this.token}`, usuario , { headers } );
+    const user_id = localStorage.getItem('user_id');
+    return this.http.put(`${GLOBAL.url}usuarios/${user_id}`, usuario , { headers } );
   }
 
   updateEstadoUsuario(usuario:any): Observable<any>{
     const headers = this.hearders();
     return this.http.put(`${GLOBAL.url}user/${usuario.user_id}`, usuario , { headers } );
+  }
+
+  updateUsuarioByAdmin(usuario:any): Observable<any>{
+    const headers = this.hearders();
+    return this.http.put(`${GLOBAL.url}usuarios/${usuario.user_id}`, usuario , { headers } );
   }
 
 }

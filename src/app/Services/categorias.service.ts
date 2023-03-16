@@ -8,8 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class CategoriasService {
 
-  token: string = String(localStorage.getItem('token'));
-
   constructor(private http: HttpClient) { }
 
   hearders() {

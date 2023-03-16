@@ -8,9 +8,6 @@ import { GLOBAL } from './global.service';
 })
 export class ProductosService {
 
-
-  token: string = String(localStorage.getItem('token'));
-
   constructor(private http: HttpClient) { }
 
   hearders() {
@@ -20,7 +17,8 @@ export class ProductosService {
 
   getFavoritesProducts(): Observable<any> {
     const headers = this.hearders();
-    return this.http.get(`${GLOBAL.url}products/favorites?token=${this.token}`, { headers });
+    const user_id = localStorage.getItem('user_id');
+    return this.http.get(`${GLOBAL.url}products/favorites?user_id=${user_id}`, { headers });
   }
 
 

@@ -27,17 +27,23 @@ export class HomeComponent {
     this.spinner.show();
     this.authService.logout().subscribe(result => {
       if (result.status) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('rol');
         Swal.fire({ position: 'center', icon: 'success', title: result.alert, showConfirmButton: false, timer: 2500 });
         this.router.navigateByUrl('/Login');
       } else {
         Swal.fire({ allowOutsideClick: false, icon: 'error', text: result.alert, confirmButtonColor: 'rgb(220,53,69)' });
       }
       this.spinner.hide();
+    },
+    error=>{
+      this.spinner.hide();
+      console.log(error);
+      localStorage.removeItem('token');
+      localStorage.removeItem('rol');
+      this.router.navigateByUrl('/Login');
     });
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('rol');
-    
   }
 
   changePassword() {
